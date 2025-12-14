@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SonicPro - Audio Redefined</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f5f5f7;
+            --text: #1d1d1f;
+            --blue: #0071e3;
+            --gray: #86868b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .buy-btn {
+            background: var(--blue);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .buy-btn:hover {
+            background: #005bb5;
+        }
+
+        .hero {
+            padding-top: 150px;
+            padding-bottom: 50px;
+            text-align: center;
+        }
+
+        .eyebrow {
+            color: var(--blue);
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+            opacity: 0;
+            animation: fadeUp 1s forwards;
+        }
+
+        h1 {
+            font-size: 5rem;
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeUp 1s 0.2s forwards;
+        }
+
+        p.subhead {
+            font-size: 1.5rem;
+            color: var(--gray);
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeUp 1s 0.4s forwards;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-stage {
+            position: relative;
+            height: 500px;
+            perspective: 1000px;
+            margin-bottom: 100px;
+        }
+
+        .product-image {
+            margin: 0 auto;
+            width: 500px;
+            height: 400px;
+            background: #d1d1d6;
+            border-radius: 40px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.1s;
+        }
+
+        .headband {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%) translateZ(20px);
+            width: 300px;
+            height: 300px;
+            border: 40px solid #333;
+            border-bottom: none;
+            border-radius: 150px 150px 0 0;
+        }
+
+        .earcup {
+            width: 100px;
+            height: 140px;
+            background: #222;
+            position: absolute;
+            top: 300px;
+            border-radius: 40px;
+            transform: translateZ(50px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .earcup.left {
+            left: 100px;
+        }
+
+        .earcup.right {
+            right: 100px;
+        }
+
+        /* Interactive Hotspots */
+        .hotspot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--blue);
+            border-radius: 50%;
+            border: 3px solid white;
+            cursor: pointer;
+            z-index: 10;
+            transition: 0.3s;
+        }
+
+        .hotspot:hover {
+            transform: scale(1.5);
+        }
+
+        .hotspot::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.2s;
+        }
+
+        .hotspot:hover::after {
+            opacity: 1;
+            bottom: 35px;
+        }
+
+        .features {
+            background: white;
+            padding: 100px 20px;
+        }
+
+        .grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            text-align: left;
+        }
+
+        .feature h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        /* Specs Table */
+        .specs {
+            padding: 100px 20px;
+            background: #fafafa;
+        }
+
+        .specs-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .spec-row {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            padding: 20px 0;
+        }
+
+        .spec-label {
+            font-weight: 600;
+        }
+
+        .spec-val {
+            color: var(--gray);
+        }
+
+        .big-text-section {
+            padding: 150px 20px;
+            background: black;
+            color: white;
+            text-align: center;
+        }
+
+        .big-text {
+            font-size: 4rem;
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(to right, #fff, #666);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* In the Box */
+        .in-box {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .box-grid {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .box-item {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 20px;
+            display: grid;
+            place-items: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            .product-image {
+                width: 300px;
+                transform: scale(0.8);
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-content">
+            <div class="logo">SonicPro Max</div>
+            <a href="#" class="buy-btn">Buy Now</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <span class="eyebrow">New Arrival</span>
+        <h1>Sound unlike <br> anything else.</h1>
+        <p class="subhead">Active Noise Cancellation. Spatial Audio. 40h Battery.</p>
+
+        <div class="product-stage">
+            <div class="product-image" id="product">
+                <div class="headband"></div>
+                <div class="earcup left"></div>
+                <div class="earcup right"></div>
+
+                <!-- Hotspots -->
+                <div class="hotspot" style="top: 80px; left: 50%;" data-tooltip="Stainless Steel Frame"></div>
+                <div class="hotspot" style="top: 320px; left: 140px;" data-tooltip="Memory Foam Cushions"></div>
+                <div class="hotspot" style="top: 350px; right: 120px;" data-tooltip="Digital Crown Control"></div>
+            </div>
+        </div>
+    </div>
+
+    <section class="features">
+        <div class="grid">
+            <div class="feature">
+                <h3>Silence the world.</h3>
+                <p>Industry-leading noise cancellation adapts to your environment 200 times per second.</p>
+            </div>
+            <div class="feature">
+                <h3>Heavy on bass.</h3>
+                <p>Custom-built drivers deliver deep, rich bass without muddying the mids or highs.</p>
+            </div>
+            <div class="feature">
+                <h3>Light on ears.</h3>
+                <p>Memory foam ear cushions and a knit mesh canopy designed for all-day comfort.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="big-text-section">
+        <div class="big-text">Immerse yourself in pure acoustic precision.</div>
+    </section>
+
+    <section class="specs">
+        <div class="specs-container">
+            <h2 style="margin-bottom: 40px; font-size: 2rem;">Technical Specifications</h2>
+            <div class="spec-row">
+                <span class="spec-label">Audio Technology</span>
+                <span class="spec-val">Active Noise Cancellation, Transparency Mode</span>
+            </div>
+            <div class="spec-row">
+                <span class="spec-label">Sensors</span>
+                <span class="spec-val">Optical, Position, Case-detect</span>
+            </div>
+            <div class="spec-row">
+                <span class="spec-label">Microphones</span>
+                <span class="spec-val">9 total microphones</span>
+            </div>
+            <div class="spec-row">
+                <span class="spec-label">Battery Chip</span>
+                <span class="spec-val">Sonic H1 Headphone Chip</span>
+            </div>
+            <div class="spec-row">
+                <span class="spec-label">Connectivity</span>
+                <span class="spec-val">Bluetooth 5.3</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="in-box">
+        <h2>What's in the Box</h2>
+        <div class="box-grid">
+            <div>
+                <div class="box-item">🎧</div>
+                <p style="margin-top: 10px; font-size: 0.9rem;">SonicPro Max</p>
+            </div>
+            <div>
+                <div class="box-item">💼</div>
+                <p style="margin-top: 10px; font-size: 0.9rem;">Smart Case</p>
+            </div>
+            <div>
+                <div class="box-item">⚡</div>
+                <p style="margin-top: 10px; font-size: 0.9rem;">USB-C Cable</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Mouse Tracking Spot effect
+        const stage = document.querySelector('.product-stage');
+        const product = document.querySelector('.product-image');
+
+        stage.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            product.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+
+        stage.addEventListener('mouseleave', () => {
+            product.style.transform = `rotateY(0deg) rotateX(0deg)`;
+        });
+    </script>
+</body>
+
+</html>

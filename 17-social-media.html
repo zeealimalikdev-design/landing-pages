@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViralPulse | Social Media Marketing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --gradient-start: #f43f5e;
+            --gradient-end: #8b5cf6;
+            --dark: #111827;
+            --light: #f9fafb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 10px 25px rgba(244, 63, 94, 0.4);
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(244, 63, 94, 0.6);
+        }
+
+        /* Fancy Navbar */
+        nav {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero h1 span {
+            color: #f43f5e;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%);
+            z-index: -1;
+            filter: blur(60px);
+        }
+
+        /* Phone mockup simulation */
+        .phone-mockup {
+            width: 300px;
+            height: 600px;
+            background: #111827;
+            border-radius: 40px;
+            margin: 60px auto;
+            border: 8px solid #374151;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .notch {
+            width: 150px;
+            height: 30px;
+            background: #374151;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            z-index: 10;
+        }
+
+        .screen {
+            height: 100%;
+            background: linear-gradient(180deg, #1f2937, #111827);
+            padding: 50px 20px;
+            color: white;
+            text-align: left;
+        }
+
+        .feed-item {
+            background: #374151;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            animation: slideUp 5s infinite ease-in-out;
+        }
+
+        @keyframes slideUp {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Stats Strip */
+        .stats {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0;
+            margin-top: -100px;
+            padding-top: 150px;
+            clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .stat-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-num {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(to right, #f43f5e, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .stats {
+                clip-path: none;
+                margin-top: 0;
+                padding-top: 60px;
+            }
+        }
+    </style>
+    <style>
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .phone-mockup {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <nav>
+            <div class="logo">VIRAL.</div>
+            <a href="#" class="btn" style="padding: 10px 25px; font-size: 0.9rem;">Start Now</a>
+        </nav>
+
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div>
+                <h1>Stop Posting. <br> Start <span>Influencing.</span></h1>
+                <p>Data-driven social media strategies that turn followers into superfans and likes into revenue.</p>
+                <div style="display: flex; gap: 20px; justify-content: center;">
+                    <a href="#" class="btn">Get Audit</a>
+                    <a href="#"
+                        style="padding: 15px 30px; color: var(--dark); text-decoration: none; font-weight: 600; display: flex; align-items: center;">View
+                        Case Studies &rarr;</a>
+                </div>
+
+                <div class="phone-mockup">
+                    <div class="notch"></div>
+                    <div class="screen">
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                            <div style="width: 40px; height: 40px; background: #ec4899; border-radius: 50%;"></div>
+                            <div style="font-weight: 700;">YourBrand</div>
+                        </div>
+                        <div class="feed-item"
+                            style="height: 150px; background: linear-gradient(45deg, #f43f5e, #8b5cf6);"></div>
+                        <div class="feed-item" style="height: 20px; width: 60%;"></div>
+                        <div class="feed-item" style="height: 20px; width: 80%;"></div>
+                        <div style="color: #ec4899; font-weight: 700; margin-top: 10px;">♥ 42.5k Likes</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="stats">
+        <div class="container stat-grid">
+            <div>
+                <div class="stat-num">500%</div>
+                <div style="color: #9ca3af;">Avg. Engagement Growth</div>
+            </div>
+            <div>
+                <div class="stat-num">2M+</div>
+                <div style="color: #9ca3af;">Content Impressions</div>
+            </div>
+            <div>
+                <div class="stat-num">10k</div>
+                <div style="color: #9ca3af;">Leads Generated</div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        });
+        document.querySelectorAll('.stat-grid').forEach(el => {
+            el.classList.add('reveal');
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>

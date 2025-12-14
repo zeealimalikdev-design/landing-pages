@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vault - Modern Banking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0052cc;
+            --primary-dark: #0043a6;
+            --accent: #36b37e;
+            --bg: #f4f5f7;
+            --text-dark: #172b4d;
+            --text-light: #5e6c84;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navbar */
+        nav {
+            background: var(--white);
+            padding: 20px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            font-size: 1.2rem;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 80px 0;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: #091e42;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            max-width: 450px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 82, 204, 0.3);
+        }
+
+        .btn-outline {
+            border: 2px solid #ebecf0;
+            color: var(--text-dark);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--text-dark);
+        }
+
+        /* Card/Phone Visual */
+        .hero-visual {
+            flex: 1;
+            position: relative;
+        }
+
+        .card-stack {
+            position: relative;
+            background: white;
+            padding: 20px;
+            border-radius: 24px;
+            box-shadow: 0 40px 100px -20px rgba(50, 50, 93, 0.25);
+            max-width: 400px;
+            margin: 0 auto;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .credit-card {
+            background: linear-gradient(135deg, #0052cc, #2684ff);
+            height: 200px;
+            border-radius: 16px;
+            color: white;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 20px 40px rgba(0, 82, 204, 0.3);
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+
+        .credit-card:hover {
+            transform: scale(1.02);
+        }
+
+        .balance-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .balance-amount {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .card-number {
+            letter-spacing: 2px;
+            font-size: 1.1rem;
+        }
+
+        .transaction-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .transaction {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+
+        .transaction:hover {
+            background: #f4f5f7;
+        }
+
+        .t-icon {
+            width: 40px;
+            height: 40px;
+            background: #e3fcef;
+            color: var(--accent);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+        }
+
+        .t-details {
+            flex: 1;
+        }
+
+        .t-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .t-date {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .t-amount {
+            font-weight: 700;
+        }
+
+        /* Logo Cloud */
+        .logos {
+            padding: 50px 0;
+            text-align: center;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .logo-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+            opacity: 0.6;
+            grayscale: 1;
+            filter: grayscale(100%);
+            flex-wrap: wrap;
+        }
+
+        /* Features */
+        .features {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            padding: 30px;
+            border-radius: 16px;
+            background: var(--bg);
+            transition: 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .f-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        /* Security */
+        .security {
+            padding: 80px 0;
+            display: flex;
+            align-items: center;
+            gap: 80px;
+        }
+
+        .sec-content {
+            flex: 1;
+        }
+
+        .sec-visual {
+            flex: 1;
+            height: 400px;
+            background: linear-gradient(135deg, #172b4d, #091e42);
+            border-radius: 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .shield {
+            font-size: 8rem;
+        }
+
+        /* FAQ */
+        .faq {
+            padding: 80px 0;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-question {
+            padding: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            padding: 0 20px 20px;
+            color: var(--text-light);
+            display: none;
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-question {
+            color: var(--primary);
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: #091e42;
+            color: white;
+            padding: 60px 0;
+            margin-top: 50px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 20px;
+            opacity: 0.6;
+        }
+
+        .footer-links a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 10px;
+            opacity: 0.8;
+            transition: 0.2s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--accent);
+        }
+
+        @media (max-width: 800px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text {
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .security {
+                flex-direction: column-reverse;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="container nav-content">
+            <div class="logo"><span>V</span> Vault</div>
+            <div>
+                <a href="#"
+                    style="text-decoration: none; color: var(--text-dark); font-weight: 600; margin-left: 20px;">Personal</a>
+                <a href="#"
+                    style="text-decoration: none; color: var(--text-dark); font-weight: 600; margin-left: 20px;">Business</a>
+                <a href="#" class="btn btn-primary" style="margin-left: 20px; padding: 10px 20px;">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="container hero">
+        <div class="hero-text">
+            <h1>Banking built for <br> <span style="color: var(--primary)">tomorrow</span></h1>
+            <p>Experience zero fees, instant transfers, and 2.5% cashback on every purchase. Your money, maximized.</p>
+            <div class="btn-group">
+                <a href="#" class="btn btn-primary">Open Account</a>
+                <a href="#" class="btn btn-outline">View Demo</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="card-stack">
+                <div class="credit-card">
+                    <div>
+                        <div class="balance-label">Total Balance</div>
+                        <div class="balance-amount">$12,450.00</div>
+                    </div>
+                    <div class="card-number">•••• •••• •••• 4289</div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Alex Zee</span>
+                        <span>09/28</span>
+                    </div>
+                </div>
+                <div class="transaction-list">
+                    <div class="transaction">
+                        <div class="t-icon">🛒</div>
+                        <div class="t-details">
+                            <div class="t-title">Whole Foods Market</div>
+                            <div class="t-date">Today, 10:23 AM</div>
+                        </div>
+                        <div class="t-amount">-$84.20</div>
+                    </div>
+                    <div class="transaction">
+                        <div class="t-icon" style="background: #e6fcff; color: #00b8d9;">💸</div>
+                        <div class="t-details">
+                            <div class="t-title">Transfer from Sarah</div>
+                            <div class="t-date">Yesterday, 4:15 PM</div>
+                        </div>
+                        <div class="t-amount" style="color: var(--accent)">+$250.00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container logos">
+        <p>TRUSTED BY INNOVATIVE TEAMS AT</p>
+        <div class="logo-grid">
+            <span>STRIPE</span>
+            <span>AIRBNB</span>
+            <span>SPOTIFY</span>
+            <span>SLACK</span>
+            <span>UBER</span>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 20px;">Everything you need,<br>less of what
+                you don't.</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="f-icon">💳</span>
+                    <h3>Virtual Cards</h3>
+                    <p style="color: var(--text-light)">Create disposable or permanent virtual cards for safer online
+                        shopping instantly.</p>
+                </div>
+                <div class="feature-card" style="transition-delay: 100ms">
+                    <span class="f-icon">📊</span>
+                    <h3>Smart Insight</h3>
+                    <p style="color: var(--text-light)">Deep dive into your spending habits with auto-categorized
+                        transaction reports.</p>
+                </div>
+                <div class="feature-card" style="transition-delay: 200ms">
+                    <span class="f-icon">🌍</span>
+                    <h3>Global Transfers</h3>
+                    <p style="color: var(--text-light)">Send money to 50+ countries with real exchange rates and zero
+                        hidden markups.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container security">
+        <div class="sec-content">
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Bank-grade Security</h2>
+            <p style="color: var(--text-light); margin-bottom: 20px; font-size: 1.1rem;">We use 256-bit AES encryption
+                and support biometric authentication to ensure your funds are always safe.</p>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 15px;">
+                <li style="display: flex; gap: 10px; align-items: center;"><span style="color: var(--accent);">✓</span>
+                    FDIC Insured up to $250k</li>
+                <li style="display: flex; gap: 10px; align-items: center;"><span style="color: var(--accent);">✓</span>
+                    Zero Liability Protection</li>
+                <li style="display: flex; gap: 10px; align-items: center;"><span style="color: var(--accent);">✓</span>
+                    Instant Freeze & Unfreeze</li>
+            </ul>
+        </div>
+        <div class="sec-visual">
+            <div class="shield">🛡️</div>
+            <!-- Decorative circle -->
+            <div
+                style="position: absolute; width: 300px; height: 300px; border: 20px solid rgba(255,255,255,0.05); border-radius: 50%;">
+            </div>
+        </div>
+    </section>
+
+    <section class="container faq">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 40px;">Frequently Asked Questions</h2>
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div class="faq-item">
+                <div class="faq-question">Is there a monthly fee? <span>+</span></div>
+                <div class="faq-answer">No, Vault is completely free for standard personal accounts. No maintenance
+                    fees, no overdraft fees.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How do I deposit money? <span>+</span></div>
+                <div class="faq-answer">You can deposit money via direct deposit, bank transfer, or by depositing cash
+                    at over 50,000 retail locations.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Is my money insured? <span>+</span></div>
+                <div class="faq-answer">Yes, all deposits are FDIC insured up to $250,000 through our partner bank.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Can I use Vault abroad? <span>+</span></div>
+                <div class="faq-answer">Absolutely. We don't charge foreign transaction fees, so you can spend freely
+                    wherever you go.</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <div class="footer-logo"><span>V</span> Vault</div>
+                <p style="opacity: 0.7; line-height: 1.6;">Reinventing the way you bank. Simple, transparent, and secure
+                    financial services for everyone.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Product</h4>
+                <a href="#">Checking</a>
+                <a href="#">Savings</a>
+                <a href="#">Credit</a>
+                <a href="#">Invest</a>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <a href="#">About</a>
+                <a href="#">Careers</a>
+                <a href="#">Press</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Security</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple Interaction Script
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+                const span = item.querySelector('span');
+                span.textContent = parent.classList.contains('active') ? '-' : '+';
+            });
+        });
+
+        // Scroll Observer for Animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.feature-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+
+</html>

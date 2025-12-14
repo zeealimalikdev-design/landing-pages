@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jonas.Design - Creative Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #e6e6e6;
+            --black: #050505;
+            --accent: #ff3c00;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            cursor: none;
+            /* Custom cursor */
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--black);
+            font-family: 'Archivo', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            background: var(--black);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background 0.3s;
+            mix-blend-mode: exclusion;
+        }
+
+        .cursor.hovered {
+            width: 80px;
+            height: 80px;
+            background: white;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid var(--black);
+            padding-bottom: 20px;
+            margin-bottom: 60px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero {
+            margin-bottom: 150px;
+        }
+
+        h1 {
+            font-family: 'Anton', sans-serif;
+            font-size: 12vw;
+            line-height: 0.9;
+            text-transform: uppercase;
+            color: var(--black);
+            position: relative;
+        }
+
+        .outline {
+            color: transparent;
+            -webkit-text-stroke: 2px var(--black);
+            position: relative;
+            display: inline-block;
+        }
+
+        .scrolling-img {
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            width: 300px;
+            height: 400px;
+            background: #333;
+            z-index: -1;
+            opacity: 0.2;
+            transform: rotate(10deg);
+        }
+
+        /* Work Grid */
+        .section-title {
+            font-family: 'Anton';
+            font-size: 3rem;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .work-item {
+            position: relative;
+            border: 2px solid var(--black);
+            height: 500px;
+            transition: 0.3s;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+            overflow: hidden;
+            text-decoration: none;
+            color: var(--black);
+        }
+
+        .work-item:hover {
+            transform: translate(-10px, -10px);
+            box-shadow: 15px 15px 0 var(--accent);
+        }
+
+        .work-title {
+            font-family: 'Anton';
+            font-size: 3rem;
+            z-index: 2;
+            mix-blend-mode: difference;
+            color: white;
+            transform: translateY(20px);
+            transition: 0.3s;
+        }
+
+        .work-item:hover .work-title {
+            transform: translateY(0);
+        }
+
+        .work-cat {
+            color: white;
+            z-index: 2;
+            mix-blend-mode: difference;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .work-item:hover .work-cat {
+            opacity: 1;
+        }
+
+        .project-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: 0.5s;
+        }
+
+        .work-item:hover .project-img {
+            filter: grayscale(0%);
+            transform: scale(1.1);
+        }
+
+        /* Process Section */
+        .process {
+            padding: 100px 0;
+            border-top: 2px solid var(--black);
+            margin-top: 100px;
+        }
+
+        .process-step {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 60px;
+            transition: 0.3s;
+        }
+
+        .process-step:hover {
+            opacity: 0.6;
+        }
+
+        .step-num {
+            font-family: 'Anton';
+            font-size: 4rem;
+            margin-right: 40px;
+            -webkit-text-stroke: 1px var(--black);
+            color: transparent;
+        }
+
+        .step-content {
+            flex: 1;
+            border-top: 1px solid var(--black);
+            padding-top: 20px;
+        }
+
+        .step-content h3 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* Ticker */
+        .ticker-wrap {
+            position: relative;
+            overflow: hidden;
+            background-color: var(--black);
+            color: var(--bg);
+            padding: 30px 0;
+            white-space: nowrap;
+            margin-top: 100px;
+            transform: rotate(-2deg) scale(1.05);
+        }
+
+        .ticker {
+            display: inline-block;
+            animation: ticker 20s infinite linear;
+        }
+
+        .ticker__item {
+            display: inline-block;
+            padding: 0 4rem;
+            font-size: 4rem;
+            font-family: 'Anton';
+            text-transform: uppercase;
+        }
+
+        @keyframes ticker {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            100% {
+                transform: translate3d(-100%, 0, 0);
+            }
+        }
+
+        /* Footer */
+        .contact {
+            padding: 150px 40px;
+            background: var(--accent);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-family: 'Anton';
+            font-size: 6vw;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+            font-size: 1.2rem;
+        }
+
+        .socials a {
+            color: white;
+            text-decoration: none;
+            border: 1px solid white;
+            padding: 10px 30px;
+            border-radius: 50px;
+            transition: 0.3s;
+        }
+
+        .socials a:hover {
+            background: white;
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 18vw;
+            }
+
+            .work-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-step {
+                flex-direction: column;
+            }
+
+            .step-num {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cursor"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo mouse-hover">Jonas.Design</div>
+            <div style="font-weight: 600;" class="mouse-hover">Menu</div>
+        </header>
+
+        <section class="hero">
+            <h1>Visual <br> <span class="outline">Storyteller</span></h1>
+            <p style="max-width: 400px; margin-left: auto; font-size: 1.5rem; margin-top: 20px; line-height: 1.4;">
+                Based in Tokyo. Specializing in brutalist web design and interactive experiences for bold brands.
+            </p>
+        </section>
+
+        <div class="section-title">Selected Works 2023-24</div>
+        <section class="work-grid">
+            <a href="#" class="work-item mouse-hover">
+                <div style="background: #333; width: 100%; height: 100%; position: absolute; top:0; left:0;"
+                    class="project-img"></div>
+                <span class="work-cat">E-Commerce</span>
+                <span class="work-title">NEON STREET</span>
+            </a>
+            <a href="#" class="work-item mouse-hover">
+                <div style="background: #555; width: 100%; height: 100%; position: absolute; top:0; left:0;"
+                    class="project-img"></div>
+                <span class="work-cat">Branding</span>
+                <span class="work-title">ARCHITECT.IO</span>
+            </a>
+            <a href="#" class="work-item mouse-hover">
+                <div style="background: #777; width: 100%; height: 100%; position: absolute; top:0; left:0;"
+                    class="project-img"></div>
+                <span class="work-cat">Portfolio</span>
+                <span class="work-title">KIM STUDIO</span>
+            </a>
+            <a href="#" class="work-item mouse-hover">
+                <div style="background: #999; width: 100%; height: 100%; position: absolute; top:0; left:0;"
+                    class="project-img"></div>
+                <span class="work-cat">Web App</span>
+                <span class="work-title">FLUX DASHBOARD</span>
+            </a>
+        </section>
+
+        <section class="process">
+            <div class="section-title">My Approach</div>
+
+            <div class="process-step">
+                <div class="step-num">01</div>
+                <div class="step-content">
+                    <h3>Discovery & Strategy</h3>
+                    <p>I dig deep into your brand values. No templates. No shortcuts. Just pure strategic alignment to
+                        ensure the design solves real business problems.</p>
+                </div>
+            </div>
+
+            <div class="process-step">
+                <div class="step-num">02</div>
+                <div class="step-content">
+                    <h3>Visual Exploration</h3>
+                    <p>Testing boundaries with bold typography, unexpected layouts, and micro-interactions that keep
+                        users engaged and memorable.</p>
+                </div>
+            </div>
+
+            <div class="process-step">
+                <div class="step-num">03</div>
+                <div class="step-content">
+                    <h3>Development</h3>
+                    <p>Clean, semantic code. Fast load times. SEO optimized. Building the web properly using modern
+                        standards.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <div class="ticker__item">Let's work together</div>
+            <div class="ticker__item">•</div>
+            <div class="ticker__item">Available for 2024</div>
+            <div class="ticker__item">•</div>
+            <div class="ticker__item">Let's work together</div>
+            <div class="ticker__item">•</div>
+            <div class="ticker__item">Available for 2024</div>
+            <div class="ticker__item">•</div>
+            <div class="ticker__item">Let's work together</div>
+        </div>
+    </div>
+
+    <div class="contact">
+        <h2>Ready to make<br>some noise?</h2>
+        <div class="socials">
+            <a href="#" class="mouse-hover">Instagram</a>
+            <a href="#" class="mouse-hover">Twitter</a>
+            <a href="#" class="mouse-hover">Email Me</a>
+        </div>
+    </div>
+
+    <script>
+        // Custom Cursor Logic
+        const cursor = document.querySelector('.cursor');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.querySelectorAll('.mouse-hover').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                cursor.classList.add('hovered');
+            });
+            item.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hovered');
+            });
+        });
+    </script>
+</body>
+
+</html>

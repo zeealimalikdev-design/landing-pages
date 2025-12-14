@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ms. Emily | Private Tutor & Educator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Nunito:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #f43f5e;
+            /* Rose 500 */
+            --secondary: #fbbf24;
+            /* Amber 400 */
+            --teal: #14b8a6;
+            --bg: #fff1f2;
+            /* Rose 50 */
+            --text-dark: #374151;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 4px 0 #be123c;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #be123c;
+        }
+
+        /* Nav */
+        nav {
+            padding: 20px 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Hero */
+        header {
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-blob {
+            position: absolute;
+            z-index: -1;
+            filter: blur(50px);
+            border-radius: 50%;
+        }
+
+        .blob-1 {
+            width: 300px;
+            height: 300px;
+            background: rgba(251, 191, 36, 0.3);
+            top: -50px;
+            left: -50px;
+        }
+
+        .blob-2 {
+            width: 250px;
+            height: 250px;
+            background: rgba(20, 184, 166, 0.2);
+            bottom: 0;
+            right: -50px;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            color: #881337;
+            margin-bottom: 20px;
+        }
+
+        header p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* Feature Cards */
+        .features {
+            padding: 60px 0;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 24px;
+            /* Soft playful radius */
+            text-align: center;
+            border: 2px solid transparent;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            border-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: #e5e7eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        /* Testimonial */
+        .testimonial {
+            background: var(--white);
+            padding: 80px 0;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: #4b5563;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+
+        /* Animations */
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+
+            70% {
+                transform: scale(0.9);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-blob {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .blob-2 {
+            animation-delay: 1s;
+        }
+
+        .card.active {
+            animation: bounceIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="container">
+            <div class="logo">✏️ Ms. Emily</div>
+            <div>
+                <a href="#" class="btn" style="background: var(--teal); box-shadow: 0 4px 0 #0f766e;">Book a Session</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="container">
+        <div class="hero-blob blob-1"></div>
+        <div class="hero-blob blob-2"></div>
+        <h1>Making Learning <br> Fun & Accessible</h1>
+        <p>Experienced educator delivering personalized tutoring in Mathematics, English, and Science for K-12 students.
+        </p>
+        <a href="#" class="btn">Start Learning Today</a>
+    </header>
+
+    <section class="container features">
+        <div class="card-grid">
+            <div class="card reveal" style="transition-delay: 0.1s">
+                <div class="avatar" style="background: #fee2e2; color: #f43f5e;">📚</div>
+                <h3>Personalized Plans</h3>
+                <p>Every student learns differently. I create custom lesson plans that match your child's learning
+                    style.</p>
+            </div>
+            <div class="card">
+                <div class="avatar" style="background: #fef3c7; color: #d97706;">🌟</div>
+                <h3>Interactive Method</h3>
+                <p>No boring lectures! We use games, visual aids, and real-world examples to master concepts.</p>
+            </div>
+            <div class="card">
+                <div class="avatar" style="background: #ccfbf1; color: #0f766e;">📈</div>
+                <h3>Track Progress</h3>
+                <p>Regular detailed reports so you can see exactly how much your child has improved.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonial">
+        <div class="container">
+            <h2 style="margin-bottom: 40px; color: #881337;">Parent Success Stories</h2>
+            <div class="quote">
+                "Ms. Emily completely transformed how my son views Math. He went from hating it to asking for extra
+                homework! Truly a gifted teacher."
+            </div>
+            <div style="font-weight: 700;">- Jessica M., Parent of 4th grader</div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 40px 0; color: #6b7280; font-size: 0.9rem;">
+        <p>&copy; 2024 Emily's Tutoring Service. Passion for Education.</p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>

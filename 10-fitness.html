@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRON FORGE GYM - BECOME UNSTOPPABLE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --orange: #ff4800;
+            --black: #0c0c0c;
+            --gray: #222;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--black);
+            color: white;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .clip-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100vh;
+            background: var(--gray);
+            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+            z-index: -1;
+        }
+
+        header {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Teko', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--orange);
+        }
+
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        h1 {
+            font-family: 'Teko', sans-serif;
+            font-size: 8rem;
+            line-height: 0.85;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            font-style: italic;
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: slideIn 0.8s ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .cta-btn {
+            background: var(--orange);
+            color: white;
+            padding: 20px 60px;
+            font-size: 1.5rem;
+            font-family: 'Teko';
+            text-transform: uppercase;
+            border: none;
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: 700;
+        }
+
+        .cta-btn:hover {
+            background: white;
+            color: var(--orange);
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translate(1px, 1px) rotate(0deg);
+            }
+
+            10% {
+                transform: translate(-1px, -2px) rotate(-1deg);
+            }
+
+            20% {
+                transform: translate(-3px, 0px) rotate(1deg);
+            }
+
+            30% {
+                transform: translate(3px, 2px) rotate(0deg);
+            }
+
+            40% {
+                transform: translate(1px, -1px) rotate(1deg);
+            }
+
+            50% {
+                transform: translate(-1px, 2px) rotate(-1deg);
+            }
+
+            60% {
+                transform: translate(-3px, 1px) rotate(0deg);
+            }
+
+            70% {
+                transform: translate(3px, 1px) rotate(-1deg);
+            }
+
+            80% {
+                transform: translate(-1px, -1px) rotate(1deg);
+            }
+
+            90% {
+                transform: translate(1px, 2px) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(1px, -2px) rotate(-1deg);
+            }
+        }
+
+        .ticker-bar {
+            background: var(--orange);
+            color: black;
+            font-family: 'Teko';
+            font-size: 2rem;
+            font-weight: 700;
+            padding: 10px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            transform: rotate(-2deg) scale(1.1);
+            margin-top: 50px;
+        }
+
+        /* Benefits */
+        .benefits {
+            background: #111;
+            padding: 80px 30px;
+        }
+
+        .b-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .b-card {
+            background: var(--black);
+            padding: 40px;
+            border: 1px solid #333;
+            transition: 0.3s;
+        }
+
+        .b-card:hover {
+            border-color: var(--orange);
+            background: #1a1a1a;
+        }
+
+        .b-card h3 {
+            font-family: 'Teko';
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        /* Trainers */
+        .trainers {
+            padding: 80px 30px;
+        }
+
+        .section-title {
+            font-family: 'Teko';
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+        }
+
+        .t-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .trainer-card {
+            background: #222;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .trainer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, black);
+            z-index: 1;
+        }
+
+        .t-info {
+            z-index: 2;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .t-name {
+            font-family: 'Teko';
+            font-size: 2.5rem;
+            line-height: 1;
+        }
+
+        .t-spec {
+            color: var(--orange);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        /* Membership */
+        .membership {
+            padding: 80px 30px;
+            background: #111;
+            text-align: center;
+        }
+
+        .price-card {
+            display: inline-block;
+            background: var(--black);
+            border: 2px solid #333;
+            padding: 40px;
+            margin: 20px;
+            width: 300px;
+            transition: 0.3s;
+            clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%, 0 10%);
+
+        }
+
+        .price-card:hover {
+            border-color: var(--orange);
+            transform: scale(1.05);
+        }
+
+        .price {
+            font-family: 'Teko';
+            font-size: 4rem;
+            color: var(--orange);
+        }
+
+        .price span {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+            opacity: 0.8;
+        }
+
+        .features-list li {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 5rem;
+            }
+
+            .clip-bg {
+                width: 100%;
+                height: 50vh;
+                top: auto;
+                bottom: 0;
+                clip-path: polygon(0 20%, 100% 0, 100% 100%, 0% 100%);
+            }
+
+            .hero {
+                flex-direction: column;
+                height: auto;
+                padding-top: 50px;
+            }
+
+            .b-grid,
+            .t-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="clip-bg"></div>
+
+    <header>
+        <div class="logo">IRON FORGE</div>
+        <div style="font-family: 'Teko'; font-size: 1.5rem;">JOIN NOW</div>
+    </header>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Built <br> To <span style="color: var(--orange)">Break</span> <br> Limits</h1>
+            <p style="font-size: 1.2rem; margin-bottom: 40px; max-width: 500px; opacity: 0.8;">State of the art
+                equipment. 24/7 Access. Elite personal training. Stop making excuses and start making history.</p>
+            <button class="cta-btn">Start 7-Day Free Trial</button>
+        </div>
+    </div>
+
+    <div class="ticker-bar">
+        NO PAIN NO GAIN // TRANSFORMATION STARTS HERE // COMMIT TO FIT // NO PAIN NO GAIN // TRANSFORMATION STARTS HERE
+        // COMMIT TO FIT
+    </div>
+
+    <section class="benefits">
+        <div class="b-grid">
+            <div class="b-card">
+                <h3>01. ELITE COACHING</h3>
+                <p>Train with former Olympians and certified experts who push you past your limits.</p>
+            </div>
+            <div class="b-card">
+                <h3>02. HYBRID ZONES</h3>
+                <p>CrossFit, Powerlifting, and Cardio zones all under one roof. No compromises.</p>
+            </div>
+            <div class="b-card">
+                <h3>03. RECOVERY LAB</h3>
+                <p>Cryotherapy, sauna, and massage therapy to keep you performing at peak levels.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="trainers">
+        <div class="section-title">Meet the Masters</div>
+        <div class="t-grid">
+            <div class="trainer-card">
+                <div class="t-info">
+                    <div class="t-name">ALEX STONE</div>
+                    <div class="t-spec">Strength & Conditioning</div>
+                </div>
+            </div>
+            <div class="trainer-card">
+                <div class="t-info">
+                    <div class="t-name">JESSICA STEELE</div>
+                    <div class="t-spec">HIIT & Mobility</div>
+                </div>
+            </div>
+            <div class="trainer-card">
+                <div class="t-info">
+                    <div class="t-name">MARCUS KING</div>
+                    <div class="t-spec">Powerlifting Coach</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="membership">
+        <div class="section-title">Membership Plans</div>
+        <div class="price-plans">
+            <div class="price-card">
+                <h3>ESSENTIAL</h3>
+                <div class="price">$49 <span>/mo</span></div>
+                <ul class="features-list">
+                    <li>24/7 Gym Access</li>
+                    <li>Locker Room Access</li>
+                    <li>1 Guest Pass /mo</li>
+                </ul>
+                <button class="cta-btn" style="font-size: 1rem; padding: 10px 30px;">Choose Plan</button>
+            </div>
+            <div class="price-card" style="border-color: var(--orange); transform: scale(1.1);">
+                <h3 style="color: var(--orange);">ELITE</h3>
+                <div class="price">$89 <span>/mo</span></div>
+                <ul class="features-list">
+                    <li>All Essential Perks</li>
+                    <li>Unlimited Classes</li>
+                    <li>Sauna Access</li>
+                    <li>Personal Training Session</li>
+                </ul>
+                <button class="cta-btn" style="font-size: 1rem; padding: 10px 30px;">Choose Plan</button>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

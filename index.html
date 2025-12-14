@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page Collection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f1115;
+            --card-bg: #161b22;
+            --text: #ffffff;
+            --accent: #3b82f6;
+            --hover-border: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Outfit', sans-serif;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeIn 1s ease;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.subtitle {
+            color: #64748b;
+            font-size: 1.2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid #30363d;
+            border-radius: 16px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            group: 'card';
+            opacity: 0;
+            animation: slideUp 0.6s ease forwards;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .preview {
+            height: 180px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid #30363d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.5s;
+        }
+
+        .preview svg {
+            width: 64px;
+            height: 64px;
+            fill: currentColor;
+            transition: 0.3s;
+        }
+
+        .card:hover .preview svg {
+            transform: scale(1.1);
+        }
+
+        .card:hover .preview {
+            filter: brightness(1.2);
+        }
+
+        .preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3));
+        }
+
+        .info {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .desc {
+            font-size: 0.9rem;
+            color: #8b949e;
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ccc;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-view {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            background: #21262d;
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--text);
+            transition: 0.2s;
+            margin-top: auto;
+        }
+
+        .card:hover .btn-view {
+            background: var(--accent);
+            color: white;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Theme-specific styles for the preview area */
+        .theme-ai {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #c084fc;
+        }
+
+        .theme-fintech {
+            background: linear-gradient(135deg, #f4f5f7, #e2e8f0);
+            color: #0052cc;
+        }
+
+        .theme-portfolio {
+            background: #e6e6e6;
+            color: #050505;
+        }
+
+        .theme-app {
+            background: linear-gradient(180deg, #1e1b4b, #312e81);
+            color: #6366f1;
+        }
+
+        .theme-eco {
+            background: #f4f1de;
+            color: #2f3e46;
+        }
+
+        .theme-restaurant {
+            background: #121212;
+            color: #d4af37;
+        }
+
+        .theme-conf {
+            background: #050505;
+            color: #ccff00;
+            border-bottom: 2px solid #ccff00;
+        }
+
+        .theme-product {
+            background: #f5f5f7;
+            color: #1d1d1f;
+        }
+
+        .theme-estate {
+            background: #f9f7f2;
+            color: #1c1c1c;
+        }
+
+        .theme-fitness {
+            background: #0c0c0c;
+            color: #ff4800;
+        }
+
+        /* New Themes */
+        .theme-doctor {
+            background: #e0f2fe;
+            color: #0284c7;
+        }
+
+        .theme-engineer {
+            background: #1c1917;
+            color: #f97316;
+        }
+
+        .theme-software {
+            background: #09090b;
+            color: #10b981;
+        }
+
+        .theme-technician {
+            background: #0f172a;
+            color: #facc15;
+        }
+
+        .theme-teacher {
+            background: #fff1f2;
+            color: #f43f5e;
+        }
+
+        .theme-support {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .theme-social {
+            background: linear-gradient(135deg, #f43f5e, #8b5cf6);
+            color: white;
+        }
+
+        .theme-consultant {
+            background: #0f172a;
+            color: #3b82f6;
+        }
+
+        .theme-lawyer {
+            background: #1e3a8a;
+            color: #d97706;
+        }
+
+        .theme-architect {
+            background: #ffffff;
+            color: #000000;
+            border-bottom: 3px solid #000;
+        }
+
+        /* Delays */
+        .card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .card:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        .card:nth-child(7) {
+            animation-delay: 0.7s;
+        }
+
+        .card:nth-child(8) {
+            animation-delay: 0.8s;
+        }
+
+        .card:nth-child(9) {
+            animation-delay: 0.9s;
+        }
+
+        .card:nth-child(10) {
+            animation-delay: 1.0s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Landing Page Collection</h1>
+        <p class="subtitle">10 Unique Designs • Interactive & Responsive</p>
+    </header>
+
+    <div class="grid">
+
+        <a href="01-ai-saas.html" class="card" target="_blank">
+            <div class="preview theme-ai">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm-1 5h2v2h2v2h-2v2h-2v-2H9v-2h2V9zm-3 2h2v2H8v-2zm8 0h2v2h-2v-2z">
+                    </path>
+                </svg>
+            </div>
+            <div class="info">
+                <h3>NexusAI</h3>
+                <p class="desc">Futuristic SaaS platform with glassmorphism, glowing gradients, and dark mode.</p>
+                <div class="tags"><span class="tag">Dark Mode</span><span class="tag">SaaS</span><span
+                        class="tag">Glass</span></div>
+                <div class="btn-view">View Design &rarr;</div>
+            </div>
+        </a>
+
+        <a href="02-fintech.html" class="card" target="_blank">
+            <div class="preview theme-fintech">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M3 3h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1 4v12h16V7H4zm16-2H4v1h16V5zm-5 10v2H7v-2h8z">
+                    </path>
+                </svg>
+            </div>
+            <div class="info">
+                <h3>Vault Fintech</h3>
+                <p class="desc">Clean, trustworthy banking interface with dashboard elements and feature grids.</p>
+                <div class="tags"><span class="tag">Clean</span><span class="tag">Trust</span><span
+                        class="tag">Blue</span></div>
+                <div class="btn-view">View Design &rarr;</div>
+            </div>
+        </a>
+
+        <a href="03-portfolio.html" class="card" target="_blank">
+            <div class="preview theme-portfolio">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm-5 5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z">
+                    </path>
+                </svg>
+            </div>
+            <div class="info">
+                <h3>Jonas.Design</h3>
+                <p class="desc">Brutalist portfolio with large typography, marrow grids, and raw aesthetics.</p>
+                <div class="tags"><span class="tag">Brutalist</span><span class="tag">Bold</span><span
+                        class="tag">Creative</span></div>
+                <div class="btn-view">View Design &rarr;</div>
+            </div>
+        </a>
+
+        <a href="04-app-launch.html" class="card" target="_blank">
+            <div class="preview theme-app">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M6 2h12a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zm1 2v16h10V4H7zm5 13a1 1 0 1 1 0 2 1 1 0 0 1 0-2z">
+                    </path>
+                </svg>
+            </div>
+            <div class="info">
+                <h3>Snooze App</h3>
+                <p class="desc">Vibrant mobile app launch page with floating 3D elements and soft gradients.</p>
+                <div class="tags"><span class="tag">Mobile</span><span class="tag">Gradient</span><span
+                        class="tag">Playful</span></div>
+                <div class="btn-view">View Design &rarr;</div>
+            </div>
+        </a>
+
+        <a href="05-eco.html" class="card" target="_blank">
+            <div class="preview theme-eco">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M21 3v2c0 9.627-5.373 14-12 14H7.098c.212-3.012 1.15-5.835 2.753-8.226C12.338 7.526 16.383 5.068 21 3zm-9 12.822c-1.42 1.776-2.337 3.86-2.732 6.13l-.062.433-1.996-.245C7.4 20.468 9.5 17.5 12 15.822z">
+                    </path>
+                </svg>
+            </div>
+            <div class="info">
+                <h3>Earthly</h3>
+                <p class="desc">Sustainable e-commerce brand with organic shapes, earth tones, and soft motion.</p>
+                <div class="tags"><span class="tag">Eco</span><span class="tag">Minimal</span><span
+                        class="tag">Organic</span></div>
+                <div class="btn-view">View Design &rarr;</div>
+            </div>
+        </a>
+
+        <a href="06-restaurant.html" class="card" target="_blank">
+            <div class="preview theme-restaurant">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 2h16l-2 9H6L4 2zm6 11h4v7h2v2H8v-2h2v-7zm-4.5-9L6 6h12l.5-2H5.5z"></path>
+                </svg>
+            </div>
+            <div class="info">
+                <h3>Lumière</h3>
+                <p class="desc">High-end fine dining experience with elegant serif typography and rich dark backgrounds.
+                </p>
+                <div class="tags"><span class="tag">Luxury</span><span class="tag">Dark</span><span
+                        class="tag">Elegant</span></div>
+                <div class="btn-view">View Design &rarr;</div>
+            </div>
+        </a>
+
+        <a href="07-conference.html" class="card" target="_blank">
+            <div class="preview theme-conf">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3 3 3 0 0 1-3-3V5a3 3 0 0 1 3-3zm0 2a1 1 0 0 0-1 1v6a1 1 0 0 0 2 0V5a1 1 0 0 0-1-1zm7 7a1 1 0 0 1 2 0 9 9 0 0 1-4.708 8.016L17 19h4v2H3v-2h4l.708-.984A9 9 0 0 1 3 11a1 1 0 1 1 2 0 7 7 0 0 0 14 0z">
+                    </path>
+                </svg>
+            </div>
+            <div class="info">
+                <h3>DEV:CON</h3>
+                <p class="desc">High-energy tech conference with brutalist layout, neon accents, and glitch effects.</p>
+                <div class="tags"><span class="tag">Event</span><span class="tag">Neon</span><span
+                        class="tag">Energy</span></div>
+                <div class="btn-view">View Design &rarr;</div>
+            </div>
+        </a>
+
+        <a href="08-product.html" class="card" target="_blank">
+            <div class="preview theme-product">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 3a9 9 0 0 1 9 9v7a3 3 0 0 1-3 3h-1v-8h2v-2a7 7 0 0 0-14 0v2h2v8H6a3 3 0 0 1-3-3v-7a9 9 0 0 1 9-9z">
+                    </path>
+                </svg>
+            </div>
+            <div class="info">
+                <h3>SonicPro</h3>
+                <p class="desc">Apple-style product page with ample whitespace, 3D tilt effects, and focus on details.
+                </p>
+                <div class="tags"><span class="tag">Product</span><span class="tag">Clean</span><span class="tag">3D
+                        Hover</span></div>
+                <div class="btn-view">View Design &rarr;</div>
+            </div>
+        </a>
+
+        <a href="09-real-estate.html" class="card" target="_blank">
+            <div class="preview theme-estate">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M21 21H3a1 1 0 0 1-1-1v-8.513c0-.77.43-1.474 1.11-1.816l8-4a1 1 0 0 1 .895 0l8 4.004A2.031 2.031 0 0 1 22 12.486V20a1 1 0 0 1-1 1zM7 19h2v-5H7v5zm4 0h2v-5h-2v5zm4 0h2v-5h-2v5z">
+                    </path>
+                </svg>
+            </div>
+            <div class="info">
+                <h3>Gilded Estate</h3>
+                <p class="desc">Sophisticated real estate listing with slow panning imagery and refined layout.</p>
+                <div class="tags"><span class="tag">Real Estate</span><span class="tag">Classic</span><span
+                        class="tag">Serif</span></div>
+                <div class="btn-view">View Design &rarr;</div>
+            </div>
+        </a>
+
+        <a href="10-fitness.html" class="card" target="_blank">
+            <div class="preview theme-fitness">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 7h16v6a1 1 0 0 1-1 1h-2v6h-2v-6H9v6H7v-6H5a1 1 0 0 1-1-1V7zm2 2v3h12V9H6z"></path>
+                </svg>
+            </div>
+            <div class="info">
+                <h3>Iron Forge</h3>
+                <p class="desc">Aggressive fitness gym landing page with skewed sections and bold typography.</p>
+                <div class="tags"><span class="tag">Fitness</span><span class="tag">Bold</span><span
+                        class="tag">Action</span></div>
+                <div class="btn-view">View Design &rarr;</div>
+            </div>
+        </a>
+
+        <a href="11-doctor.html" class="card" target="_blank">
+            <div class="preview theme-doctor">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm-1 11h-4v4h-4v-4H6v-4h4V6h4v4h4v4z" />
+                </svg>
+            </div>
+            <div class="info">
+                <h3>Dr. Sarah</h3>
+                <p class="desc">Medical profile with clean blues, trust indicators, and booking functionality.</p>
+                <div class="tags"><span class="tag">Medical</span><span class="tag">Clean</span><span
+                        class="tag">Trust</span></div>
+                <div class="btn-view">View Design &rarr;</div>
+            </div>
+        </a>
+
+        <a href="12-engineer.html" class="card" target="_blank">
+            <div class="preview theme-engineer">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M22 22H2v-2h20v2zM10 2C8 2 7 3 7 5v1h10V5c0-2-1-3-3-3h-4zm8 4H6v6l2 2v6h2v-6l-2-2V8h10v10l-2 2v2h2v-2l2-2V6z" />
+                </svg>
+            </div>
+            <div class="info">
+                <h3>Struct Eng.</h3>
+                <p class="desc">Industrial engineering firm with blueprint aesthetics and technical grid.</p>
+                <div class="tags"><span class="tag">Industrial</span><span class="tag">Dark</span><span
+                        class="tag">Blueprint</span></div>
+                <div class="btn-view">View Design &rarr;</div>
+            </div>
+        </a>
+
+        <a href="13-software-engineer.html" class="card" target="_blank">
+            <div class="preview theme-software">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" />
+                </svg>
+            </div>
+            <div class="info">
+                <h3>AlexDev</h3>
+                <p class="desc">Developer portfolio with dark mode, code snippets, and neon accents.</p>
+                <div class="tags"><span class="tag">Dev</span><span class="tag">Neon</span><span class="tag">Code</span>
+                </div>
+                <div class="btn-view">View Design &rarr;</div>
+            </div>
+        </a>
+
+        <a href="14-technician.html" class="card" target="_blank">
+            <div class="preview theme-technician">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z" />
+                </svg>
+            </div>
+            <div class="info">
+                <h3>ProFix</h3>
+                <p class="desc">Technician services with high-contrast yellow/navy industrial theme.</p>
+                <div class="tags"><span class="tag">Service</span><span class="tag">Bold</span><span
+                        class="tag">Industrial</span></div>
+                <div class="btn-view">View Design &rarr;</div>
+            </div>
+        </a>
+
+        <a href="15-teacher.html" class="card" target="_blank">
+            <div class="preview theme-teacher">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72l5 2.73 5-2.73v3.72z" />
+                </svg>
+            </div>
+            <div class="info">
+                <h3>Ms. Emily</h3>
+                <p class="desc">Private tutor landing page with playful colors and friendly typography.</p>
+                <div class="tags"><span class="tag">Education</span><span class="tag">Playful</span><span
+                        class="tag">Warm</span></div>
+                <div class="btn-view">View Design &rarr;</div>
+            </div>
+        </a>
+
+        <a href="16-technical-support.html" class="card" target="_blank">
+            <div class="preview theme-support">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z" />
+                </svg>
+            </div>
+            <div class="info">
+                <h3>NextGen Help</h3>
+                <p class="desc">Support center with clean minimalist layout and search focus.</p>
+                <div class="tags"><span class="tag">Support</span><span class="tag">Clean</span><span
+                        class="tag">Minimal</span></div>
+                <div class="btn-view">View Design &rarr;</div>
+            </div>
+        </a>
+
+        <a href="17-social-media.html" class="card" target="_blank">
+            <div class="preview theme-social">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069-3.204 0-3.584-.012-4.849-.069-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0z" />
+                </svg>
+            </div>
+            <div class="info">
+                <h3>ViralPulse</h3>
+                <p class="desc">Social media agency with vibrant gradients and trendy mobile aesthetics.</p>
+                <div class="tags"><span class="tag">Trendy</span><span class="tag">Gradient</span><span
+                        class="tag">Vibrant</span></div>
+                <div class="btn-view">View Design &rarr;</div>
+            </div>
+        </a>
+
+        <a href="18-it-consultant.html" class="card" target="_blank">
+            <div class="preview theme-consultant">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z" />
+                </svg>
+            </div>
+            <div class="info">
+                <h3>Apex Solutions</h3>
+                <p class="desc">Corporate IT consultancy with dark slate theme and professional typography.</p>
+                <div class="tags"><span class="tag">Corporate</span><span class="tag">Dark</span><span
+                        class="tag">Pros</span></div>
+                <div class="btn-view">View Design &rarr;</div>
+            </div>
+        </a>
+
+        <a href="19-lawyer.html" class="card" target="_blank">
+            <div class="preview theme-lawyer">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
+                </svg>
+            </div>
+            <div class="info">
+                <h3>Harrison Law</h3>
+                <p class="desc">Traditional legal firm with navy/gold color scheme and authoritative serif fonts.</p>
+                <div class="tags"><span class="tag">Legal</span><span class="tag">Serif</span><span
+                        class="tag">Trust</span></div>
+                <div class="btn-view">View Design &rarr;</div>
+            </div>
+        </a>
+
+        <a href="20-architect.html" class="card" target="_blank">
+            <div class="preview theme-architect">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 2.09l9 3.91-9 4.09-9-4.09L12 2.09zM3 13.91l9 4.09 9-4.09V19c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2v-5.09z" />
+                </svg>
+            </div>
+            <div class="info">
+                <h3>KAHN</h3>
+                <p class="desc">Architectural portfolio with monochrome, high-contrast, minimalist design.</p>
+                <div class="tags"><span class="tag">Minimal</span><span class="tag">Mono</span><span
+                        class="tag">Arts</span></div>
+                <div class="btn-view">View Design &rarr;</div>
+            </div>
+        </a>
+
+    </div>
+
+    <footer style="text-align: center; margin-top: 60px; color: #444;">
+        <p>Generated by Antigravity</p>
+    </footer>
+
+</body>
+
+</html>

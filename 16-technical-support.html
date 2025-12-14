@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGen Support | 24/7 IT Help</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue: #2563eb;
+            --dark-blue: #1e3a8a;
+            --white: #ffffff;
+            --bg: #eff6ff;
+            --text: #1e293b;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--white);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            background: var(--blue);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--dark-blue);
+        }
+
+        /* Minimal clean hero */
+        .hero {
+            background: var(--bg);
+            padding: 100px 0;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: var(--dark-blue);
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            background: white;
+            padding: 10px;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.1);
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .search-box input {
+            border: none;
+            flex: 1;
+            padding: 10px 20px;
+            font-size: 1rem;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .search-box button {
+            background: var(--blue);
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .search-box button:hover {
+            background: var(--dark-blue);
+        }
+
+        /* Categories */
+        .categories {
+            padding: 80px 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .cat-card {
+            padding: 24px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            text-align: center;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .cat-card:hover {
+            border-color: var(--blue);
+            color: var(--blue);
+        }
+
+        .icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* Contact Bar */
+        .contact-bar {
+            background: #1e293b;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: 0.5s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-content {
+            animation: fadeIn 1.2s ease forwards;
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                border-radius: 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav style="padding: 20px 0; border-bottom: 1px solid #f1f5f9;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-weight: 700; font-size: 1.2rem; color: var(--dark-blue);">NextGen Help</div>
+            <a href="#" style="color: var(--blue); text-decoration: none; font-weight: 500;">Submit Ticket</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>How can we help you today?</h1>
+            <p style="color: #64748b;">Browse our knowledge base or get in touch with an expert.</p>
+
+            <div class="search-box">
+                <input type="text" placeholder="Describe your issue...">
+                <button>Search</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="container categories reveal">
+        <h3 style="margin-bottom: 30px; color: var(--dark-blue);">Common Topics</h3>
+        <div class="grid">
+            <div class="cat-card">
+                <span class="icon">🔐</span>
+                <strong>Account Access</strong>
+            </div>
+            <div class="cat-card">
+                <span class="icon">💳</span>
+                <strong>Billing & Subscriptions</strong>
+            </div>
+            <div class="cat-card">
+                <span class="icon">📡</span>
+                <strong>Network Connectivity</strong>
+            </div>
+            <div class="cat-card">
+                <span class="icon">📱</span>
+                <strong>Mobile App</strong>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-bar">
+        <div class="container">
+            <h2 style="margin-bottom: 10px;">Still need help?</h2>
+            <p style="color: #94a3b8; margin-bottom: 30px;">Our support team is available 24/7 via chat or email.</p>
+            <div style="display: flex; gap: 20px; justify-content: center;">
+                <a href="#" class="btn" style="background: white; color: #1e293b;">Live Chat</a>
+                <a href="#" class="btn">Email Support</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>
