@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIXEL PUNK | Design Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon: #ccff00;
+            --black: #050505;
+            --white: #fff;
+            --pink: #ff00ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            background: var(--neon);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s;
+        }
+
+        .cursor.grow {
+            transform: scale(4);
+        }
+
+        /* Kinetic Typography */
+        .marquee {
+            width: 100%;
+            padding: 40px 0;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+            white-space: nowrap;
+            overflow: hidden;
+            background: var(--black);
+        }
+
+        .marquee-content {
+            display: inline-block;
+            font-size: 8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            animation: scroll 20s linear infinite;
+        }
+
+        .marquee-content span {
+            color: transparent;
+            -webkit-text-stroke: 2px white;
+            margin-right: 40px;
+        }
+
+        .marquee-content span:nth-child(even) {
+            color: var(--neon);
+            -webkit-text-stroke: 0;
+        }
+
+        @keyframes scroll {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Hero */
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .big-text {
+            font-size: 10vw;
+            line-height: 0.8;
+            text-align: center;
+            mix-blend-mode: exclusion;
+        }
+
+        /* Floating Shapes */
+        .shape {
+            position: absolute;
+            animation: float 10s infinite;
+            z-index: -1;
+        }
+
+        .s1 {
+            top: 20%;
+            left: 10%;
+            width: 200px;
+            height: 200px;
+            background: var(--pink);
+            border-radius: 50%;
+            filter: blur(50px);
+        }
+
+        .s2 {
+            bottom: 20%;
+            right: 10%;
+            width: 300px;
+            height: 300px;
+            background: var(--neon);
+            border-radius: 50%;
+            filter: blur(60px);
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            33% {
+                transform: translate(30px, -50px);
+            }
+
+            66% {
+                transform: translate(-20px, 20px);
+            }
+        }
+
+        /* Grid */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            border-top: 1px solid #333;
+        }
+
+        .grid-item {
+            height: 500px;
+            border-right: 1px solid #333;
+            border-bottom: 1px solid #333;
+            padding: 40px;
+            position: relative;
+            transition: 0.3s;
+            overflow: hidden;
+        }
+
+        .grid-item:hover {
+            background: #111;
+        }
+
+        .grid-item h3 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .grid-item p {
+            max-width: 300px;
+            line-height: 1.5;
+            color: #888;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hover-img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5) rotate(-10deg);
+            opacity: 0;
+            transition: 0.5s;
+            width: 300px;
+            height: 400px;
+            background: #222;
+        }
+
+        .grid-item:hover .hover-img {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        }
+
+        /* Nav */
+        nav {
+            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: white;
+            margin-left: 40px;
+        }
+
+        .nav-link:hover {
+            color: var(--neon);
+            text-decoration: line-through;
+        }
+
+        footer {
+            padding: 100px 40px;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cursor"></div>
+
+    <nav>
+        <div>Pixel Punk</div>
+        <div>
+            <a href="#" class="nav-link">Work</a>
+            <a href="#" class="nav-link">About</a>
+            <a href="#" class="nav-link">Contact</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="big-text">
+            WE BREAK<br>THE GRID
+        </div>
+        <div class="shape s1"></div>
+        <div class="shape s2"></div>
+    </header>
+
+    <div class="marquee">
+        <div class="marquee-content">
+            <span>Branding</span>
+            <span>Web Design</span>
+            <span>Motion</span>
+            <span>3D</span>
+            <span>Strategy</span>
+            <span>Branding</span>
+            <span>Web Design</span>
+            <span>Motion</span>
+            <span>3D</span>
+            <span>Strategy</span>
+        </div>
+    </div>
+
+    <section class="work-grid">
+        <div class="grid-item">
+            <h3>Nike Air</h3>
+            <p>Campaign Design, 3D Motion, Social Media Assets</p>
+            <div class="hover-img" style="background: radial-gradient(circle, #f00, #000);"></div>
+        </div>
+        <div class="grid-item">
+            <h3>Spotify</h3>
+            <p>Wrapped Experience, UI/UX, Data Viz</p>
+            <div class="hover-img" style="background: radial-gradient(circle, #0f0, #000);"></div>
+        </div>
+        <div class="grid-item">
+            <h3>Vogue</h3>
+            <p>Digital Editorial, Typography, Art Direction</p>
+            <div class="hover-img" style="background: radial-gradient(circle, #fff, #000);"></div>
+        </div>
+        <div class="grid-item">
+            <h3>Tesla</h3>
+            <p>Interface Design, Dashboard, HMI</p>
+            <div class="hover-img" style="background: radial-gradient(circle, #00f, #000);"></div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Let's make something loud.</p>
+        <a href="mailto:hello@pixelpunk.com"
+            style="color: var(--neon); text-decoration: none; font-size: 3rem; font-weight: 700; display: block; margin-top: 20px;">hello@pixelpunk.com</a>
+    </footer>
+
+    <script>
+        const cursor = document.querySelector('.cursor');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.querySelectorAll('a, .grid-item').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('grow'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('grow'));
+        });
+    </script>
+</body>
+
+</html>

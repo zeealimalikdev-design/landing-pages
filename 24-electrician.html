@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoltMasters | High Voltage Experts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --yellow: #facc15;
+            --black: #111;
+            --dark-grey: #222;
+            --white: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Chakra Petch', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Glitch effect potential keyframes */
+        @keyframes flicker {
+
+            0%,
+            19%,
+            21%,
+            23%,
+            25%,
+            54%,
+            56%,
+            100% {
+                text-shadow:
+                    -0.2rem -0.2rem 1rem #fff,
+                    0.2rem 0.2rem 1rem #ff0;
+                opacity: 1;
+            }
+
+            20%,
+            24%,
+            55% {
+                text-shadow: none;
+                opacity: 0.5;
+            }
+        }
+
+        nav {
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #333;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--yellow);
+            position: relative;
+        }
+
+        .logo::after {
+            content: '⚡';
+            position: absolute;
+            right: -25px;
+            top: 0;
+            animation: flicker 3s infinite;
+        }
+
+        .hero {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at center, #222 0%, #000 70%);
+        }
+
+        .hero h1 {
+            font-size: 6vw;
+            text-transform: uppercase;
+            line-height: 0.9;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 span {
+            color: transparent;
+            -webkit-text-stroke: 2px var(--yellow);
+            display: block;
+        }
+
+        .hero h1 span.filled {
+            color: var(--yellow);
+            -webkit-text-stroke: 0;
+        }
+
+        .btn-power {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid #333;
+            background: #222;
+            color: #555;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 0 rgba(250, 204, 21, 0);
+            margin-bottom: 30px;
+        }
+
+        .btn-power.on {
+            border-color: var(--yellow);
+            color: var(--yellow);
+            box-shadow: 0 0 30px rgba(250, 204, 21, 0.6), inset 0 0 20px rgba(250, 204, 21, 0.4);
+            text-shadow: 0 0 10px var(--yellow);
+        }
+
+        .hero-text {
+            max-width: 600px;
+            color: #888;
+            font-size: 1.2rem;
+            transition: 0.5s;
+            opacity: 0.5;
+        }
+
+        .hero-text.lit {
+            color: #fff;
+            opacity: 1;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Lightning Canvas */
+        #lightning-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        #lightning-canvas.active {
+            opacity: 1;
+        }
+
+        /* Services Grid */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            border-top: 1px solid #333;
+        }
+
+        .service-item {
+            padding: 80px 40px;
+            border-right: 1px solid #333;
+            border-bottom: 1px solid #333;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-item:hover {
+            background: #1a1a1a;
+        }
+
+        .service-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--yellow);
+        }
+
+        .service-item p {
+            color: #888;
+        }
+
+        .service-item::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--yellow);
+            transform: translateX(-100%);
+            transition: 0.4s;
+        }
+
+        .service-item:hover::before {
+            transform: translateX(0);
+        }
+
+        footer {
+            padding: 40px;
+            text-align: center;
+            background: #000;
+            color: #444;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">VOLT MASTERS</div>
+        <div style="font-weight: 600;">24/7 EMERGENCY</div>
+    </nav>
+
+    <header class="hero">
+        <canvas id="lightning-canvas"></canvas>
+        <div class="btn-power" id="power-btn" title="Turn On The Lights">⏻</div>
+        <h1>
+            <span>POWERING</span>
+            <span class="filled" id="hero-title">YOUR WORLD</span>
+        </h1>
+        <p class="hero-text" id="hero-text">Industrial | Commercial | Residential</p>
+    </header>
+
+    <section class="services">
+        <div class="service-item">
+            <h3>Installation</h3>
+            <p>Complete wiring experts for new constructions and renovations.</p>
+        </div>
+        <div class="service-item">
+            <h3>Maintenance</h3>
+            <p>Regular safety inspections and preventative care.</p>
+        </div>
+        <div class="service-item">
+            <h3>Emergency</h3>
+            <p>Rapid response team for outages and dangerous faults.</p>
+        </div>
+        <div class="service-item">
+            <h3>Smart Home</h3>
+            <p>Integration of modern automation systems.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 VoltMasters Electric. Licensed & Insured.</p>
+    </footer>
+
+    <script>
+        const btn = document.getElementById('power-btn');
+        const heroText = document.getElementById('hero-text');
+        const heroTitle = document.getElementById('hero-title');
+        const canvas = document.getElementById('lightning-canvas');
+        const ctx = canvas.getContext('2d');
+        let isOn = false;
+
+        // Resize canvas
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        // Lightning effect
+        function drawLightning(x1, y1, x2, y2, displace) {
+            if (displace < ConnectionLength) {
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 2;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = '#facc15';
+                ctx.stroke();
+                return;
+            }
+            let midX = (x1 + x2) / 2;
+            let midY = (y1 + y2) / 2;
+            midX += (Math.random() - 0.5) * displace;
+            midY += (Math.random() - 0.5) * displace;
+            drawLightning(x1, y1, midX, midY, displace / 2);
+            drawLightning(x2, y2, midX, midY, displace / 2);
+        }
+
+        const ConnectionLength = 10;
+
+        function loop() {
+            if (!isOn) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                return;
+            }
+
+            // Random chance to strike
+            if (Math.random() > 0.9) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                const startX = Math.random() * canvas.width;
+                const endX = Math.random() * canvas.width;
+                drawLightning(startX, 0, endX, canvas.height, 200);
+
+                // Flash bg
+                document.body.style.backgroundColor = '#222';
+                setTimeout(() => { document.body.style.backgroundColor = '#111'; }, 50);
+            } else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+            requestAnimationFrame(loop);
+        }
+
+        btn.addEventListener('click', () => {
+            isOn = !isOn;
+            btn.classList.toggle('on');
+            heroText.classList.toggle('lit');
+            canvas.classList.toggle('active');
+
+            if (isOn) {
+                // Initial spark sound could go here
+                heroTitle.style.textShadow = "0 0 20px rgba(250, 204, 21, 0.8)";
+                loop();
+            } else {
+                heroTitle.style.textShadow = "none";
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        });
+
+        // Start off
+        heroTitle.style.textShadow = "none";
+
+    </script>
+</body>
+
+</html>

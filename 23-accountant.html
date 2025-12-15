@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ledger & Co. | Financial Clarity</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --dark: #0f172a;
+            --gold: #d4af37;
+            --light: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--dark);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        nav {
+            padding: 30px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 80vh;
+            align-items: center;
+            gap: 60px;
+            padding: 80px 0;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            max-width: 450px;
+        }
+
+        .btn {
+            background: var(--gold);
+            color: var(--dark);
+            padding: 16px 32px;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        .visual-container {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-card {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 12px;
+            position: absolute;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-left: 4px solid var(--gold);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .stat-card.one {
+            top: -20px;
+            right: -20px;
+            z-index: 2;
+            animation-delay: 0s;
+        }
+
+        .stat-card.two {
+            bottom: -20px;
+            left: -20px;
+            z-index: 2;
+            animation-delay: 2s;
+        }
+
+        .stat-val {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .services {
+            padding: 100px 0;
+            background: #1e293b;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .service-card {
+            background: var(--dark);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            color: var(--gold);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .counter {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <nav>
+            <div class="logo">LEDGER <span>& CO.</span></div>
+            <a href="#" class="btn" style="padding: 10px 24px; font-size: 0.9rem;">Client Portal</a>
+        </nav>
+
+        <header class="hero">
+            <div>
+                <h1>Precision in<br>Every Figure.</h1>
+                <p>Strategic accounting and tax planning for forward-thinking businesses. We turn your data into
+                    actionable insights.</p>
+                <a href="#" class="btn">Schedule Consultation</a>
+            </div>
+            <div class="visual-container">
+                <canvas id="growthChart"></canvas>
+
+                <div class="stat-card one">
+                    <div class="stat-valcounter" id="roi">+245%</div>
+                    <div class="stat-label">Annual ROI</div>
+                </div>
+
+                <div class="stat-card two">
+                    <div class="stat-val counter" id="tax">$12k</div>
+                    <div class="stat-label">Tax Saved</div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <section class="services">
+        <div class="container">
+            <h2 style="font-size: 2.5rem;">Our Expertise</h2>
+            <div class="grid">
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Tax Strategy</h3>
+                    <p style="color: var(--text-muted); margin-top: 10px;">Proactive planning to minimize liability and
+                        maximize compliance.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💼</div>
+                    <h3>Bookkeeping</h3>
+                    <p style="color: var(--text-muted); margin-top: 10px;">Immaculate records maintained in real-time,
+                        giving you peace of mind.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📈</div>
+                    <h3>Growth Advisory</h3>
+                    <p style="color: var(--text-muted); margin-top: 10px;">CFO-level insights to help scale your
+                        business effectively.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Ledger & Co. Accounting. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Chart.js Animation
+        const ctx = document.getElementById('growthChart').getContext('2d');
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(212, 175, 55, 0.5)');
+        gradient.addColorStop(1, 'rgba(212, 175, 55, 0)');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Revenue Growth',
+                    data: [12, 19, 25, 45, 68, 92],
+                    borderColor: '#d4af37',
+                    backgroundColor: gradient,
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#0f172a',
+                    pointBorderColor: '#d4af37',
+                    pointBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { display: false },
+                    y: { display: false, grid: { display: false } }
+                }
+            }
+        });
+
+        // Number Counter Animation
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = (progress * (end - start) + start).toFixed(0) + (obj.id === 'roi' ? '%' : 'k');
+                if (obj.id === 'tax') obj.innerHTML = '$' + obj.innerHTML;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Trigger on load
+        window.addEventListener('load', () => {
+            animateValue(document.getElementById('roi'), 0, 245, 2000);
+            animateValue(document.getElementById('tax'), 0, 12, 2000);
+        });
+    </script>
+</body>
+
+</html>

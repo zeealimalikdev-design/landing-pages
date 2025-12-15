@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TimberCraft | Custom Woodwork</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --wood: #8d6e63;
+            --dark-wood: #5d4037;
+            --cream: #efebe9;
+        }
+
+        body {
+            font-family: 'Bitter', serif;
+            background: var(--cream);
+            color: var(--dark-wood);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Navbar as a wooden plank */
+        nav {
+            background: var(--dark-wood);
+            color: #d7ccc8;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.05) 0px, rgba(255, 255, 255, 0.05) 2px, transparent 2px, transparent 10px);
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 2px solid #d7ccc8;
+            padding: 5px 15px;
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 0 10%;
+        }
+
+        .content {
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            transform-origin: left;
+            animation: swingIn 1s ease-out;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        /* Construction Animation */
+        .construction-zone {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            perspective: 800px;
+        }
+
+        .plank {
+            background: var(--wood);
+            position: absolute;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%, rgba(0, 0, 0, 0.1) 100%);
+        }
+
+        /* Table legs */
+        .leg {
+            width: 20px;
+            height: 0;
+            /* Animates to 200px */
+            background: var(--dark-wood);
+            bottom: 50px;
+            animation: growLeg 1s ease forwards;
+        }
+
+        .l1 {
+            left: 80px;
+            animation-delay: 0.5s;
+        }
+
+        .l2 {
+            right: 80px;
+            animation-delay: 0.7s;
+        }
+
+        .l3 {
+            left: 120px;
+            bottom: 80px;
+            animation-delay: 0.9s;
+            transform: translateZ(-50px);
+            filter: brightness(0.8);
+        }
+
+        .l4 {
+            right: 120px;
+            bottom: 80px;
+            animation-delay: 1.1s;
+            transform: translateZ(-50px);
+            filter: brightness(0.8);
+        }
+
+        /* Table top */
+        .table-top {
+            width: 300px;
+            height: 20px;
+            left: 50px;
+            bottom: 250px;
+            opacity: 0;
+            transform: translateY(-100px) rotateX(45deg);
+            animation: placeTop 1s ease forwards;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes growLeg {
+            to {
+                height: 200px;
+            }
+        }
+
+        @keyframes placeTop {
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0);
+            }
+        }
+
+        @keyframes swingIn {
+            from {
+                transform: rotateY(90deg);
+                opacity: 0;
+            }
+
+            to {
+                transform: rotateY(0);
+                opacity: 1;
+            }
+        }
+
+        .btn {
+            padding: 15px 30px;
+            background: var(--dark-wood);
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.2s;
+            border: 2px solid var(--dark-wood);
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--dark-wood);
+        }
+
+        /* Grid */
+        .gallery {
+            padding: 80px 10%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .item {
+            height: 250px;
+            background: #e0e0e0;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: rgba(0, 0, 0, 0.3);
+            transition: 0.5s;
+        }
+
+        .item:hover {
+            background: var(--wood);
+            color: white;
+            box-shadow: inset 0 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border: 2px solid white;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: 0.5s;
+        }
+
+        .item:hover::before {
+            opacity: 1;
+            transform: scale(0.9);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">TimberCraft</div>
+        <div>
+            EST. 1985
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="content">
+            <h1>Handcrafted<br>Perfection.</h1>
+            <p>Bespoke furniture and cabinetry born from passion and precision. Building legacies one plank at a time.
+            </p>
+            <a href="#" class="btn">View Collection</a>
+        </div>
+        <div class="construction-zone">
+            <!-- Animated Table -->
+            <div class="plank leg l1"></div>
+            <div class="plank leg l2"></div>
+            <div class="plank leg l3"></div>
+            <div class="plank leg l4"></div>
+            <div class="plank table-top"></div>
+        </div>
+    </header>
+
+    <section class="gallery">
+        <div class="item">Kitchens</div>
+        <div class="item">Tables</div>
+        <div class="item">Chairs</div>
+        <div class="item">Cabinets</div>
+        <div class="item">Shelving</div>
+        <div class="item">Decor</div>
+    </section>
+
+</body>
+
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaFlow | Premium Plumbing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --water: #00b4d8;
+            --deep: #0077b6;
+            --white: #fff;
+            --foam: #caf0f8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            overflow-x: hidden;
+            background: #f0f9ff;
+        }
+
+        /* Waves Container */
+        .waves-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -1;
+            background: linear-gradient(180deg, #caf0f8 0%, #ffffff 100%);
+        }
+
+        .wave {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: rgba(0, 180, 216, 0.1);
+            border-radius: 40%;
+            animation: rotate 15s infinite linear;
+            left: -50%;
+            top: -120%;
+        }
+
+        .wave:nth-child(2) {
+            background: rgba(0, 119, 182, 0.1);
+            animation-duration: 20s;
+            border-radius: 45%;
+            top: -125%;
+        }
+
+        .wave:nth-child(3) {
+            background: rgba(144, 224, 239, 0.1);
+            animation-duration: 25s;
+            border-radius: 42%;
+            top: -115%;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Nav */
+        nav {
+            padding: 24px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--deep);
+            display: flex;
+            align-items: center;
+        }
+
+        .drop-icon {
+            font-size: 1.5rem;
+            margin-right: 5px;
+            color: var(--water);
+            animation: drip 3s infinite;
+        }
+
+        @keyframes drip {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(10px);
+                opacity: 1;
+            }
+
+            51% {
+                opacity: 0;
+            }
+
+            60% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Hero */
+        .hero {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            color: var(--deep);
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .btn {
+            background: var(--water);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(0, 180, 216, 0.4);
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 180, 216, 0.6);
+        }
+
+        /* Pipe Animation */
+        .pipe-container {
+            width: 300px;
+            height: 100px;
+            background: #eee;
+            margin: 40px auto;
+            position: relative;
+            border-radius: 50px;
+            overflow: hidden;
+            border: 4px solid #ddd;
+        }
+
+        .water-flow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(90deg,
+                    var(--water),
+                    var(--water) 20px,
+                    var(--deep) 20px,
+                    var(--deep) 40px);
+            animation: flow 1s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes flow {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-40px);
+            }
+        }
+
+        /* Cards */
+        .grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 80px 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .icon {
+            width: 60px;
+            height: 60px;
+            background: var(--foam);
+            color: var(--deep);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="waves-container">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+
+    <nav>
+        <div class="logo">
+            <span class="drop-icon">💧</span> AquaFlow
+        </div>
+        <a href="#" class="btn" style="padding: 10px 20px; font-size: 0.9rem;">24/7 Support</a>
+    </nav>
+
+    <header class="hero">
+        <h1>Flowing Perfectly.</h1>
+        <p>Expert plumbing solutions for residential and commercial needs. We handle the pressure so you don't have to.
+        </p>
+
+        <div class="pipe-container">
+            <div class="water-flow"></div>
+        </div>
+
+        <a href="#" class="btn">Get a Quote</a>
+    </header>
+
+    <section class="grid">
+        <div class="card">
+            <div class="icon">🔧</div>
+            <h3>Repairs</h3>
+            <p>Leaky faucets, burst pipes, and clogged drains fixed fast.</p>
+        </div>
+        <div class="card">
+            <div class="icon">🚿</div>
+            <h3>Installations</h3>
+            <p>Modern fixtures, heaters, and filtration systems.</p>
+        </div>
+        <div class="card">
+            <div class="icon">🆘</div>
+            <h3>Emergency</h3>
+            <p>24/7 rapid response team for urgen situations.</p>
+        </div>
+    </section>
+
+</body>
+
+</html>

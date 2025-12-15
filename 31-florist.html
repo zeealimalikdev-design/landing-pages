@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOOM | Fine Florals</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Jost:wght@300;400&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --pink: #ffc2d1;
+            --green: #809bce;
+            /* Actually a soft blue/purple for contrast, or sage green #95b8d1 */
+            --sage: #b5e2fa;
+            --dark: #1b263b;
+            --text: #4a4e69;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            background: #fff0f3;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Italiana', serif;
+        }
+
+        nav {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text);
+        }
+
+        .hero {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .circle-text {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            animation: spin 20s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Flower Burst Animation */
+        .flower-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .petal {
+            position: absolute;
+            width: 100px;
+            height: 200px;
+            background: linear-gradient(to top, #ff99ac, #fff);
+            border-radius: 50% 50% 0 0;
+            transform-origin: bottom center;
+            opacity: 0;
+            transform: rotate(0) scale(0);
+            animation: bloom 1.5s ease-out forwards;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+        }
+
+        /* 8 Petals */
+        .p1 {
+            transform: rotate(0deg);
+            animation-delay: 0.1s;
+        }
+
+        .p2 {
+            transform: rotate(45deg);
+            animation-delay: 0.2s;
+        }
+
+        .p3 {
+            transform: rotate(90deg);
+            animation-delay: 0.3s;
+        }
+
+        .p4 {
+            transform: rotate(135deg);
+            animation-delay: 0.4s;
+        }
+
+        .p5 {
+            transform: rotate(180deg);
+            animation-delay: 0.5s;
+            background: linear-gradient(to top, #ffb3c1, #fff);
+        }
+
+        .p6 {
+            transform: rotate(225deg);
+            animation-delay: 0.6s;
+            background: linear-gradient(to top, #ffb3c1, #fff);
+        }
+
+        .p7 {
+            transform: rotate(270deg);
+            animation-delay: 0.7s;
+            background: linear-gradient(to top, #ffb3c1, #fff);
+        }
+
+        .p8 {
+            transform: rotate(315deg);
+            animation-delay: 0.8s;
+            background: linear-gradient(to top, #ffb3c1, #fff);
+        }
+
+        @keyframes bloom {
+            to {
+                opacity: 0.9;
+                transform: rotate(var(--r)) scale(1);
+            }
+        }
+
+        /* Center */
+        .center {
+            width: 80px;
+            height: 80px;
+            background: #ffe5d9;
+            border-radius: 50%;
+            z-index: 10;
+            position: relative;
+            animation: popIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        @keyframes popIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .hero-title {
+            position: absolute;
+            z-index: 20;
+            font-size: 6rem;
+            color: #fff;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            mix-blend-mode: overlay;
+        }
+
+        .cta {
+            position: absolute;
+            bottom: 50px;
+            text-decoration: none;
+            color: var(--text);
+            border: 1px solid var(--text);
+            padding: 15px 40px;
+            border-radius: 30px;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .cta:hover {
+            background: var(--text);
+            color: #fff;
+        }
+
+        /* Gallery */
+        .gallery {
+            padding: 100px 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            height: 350px;
+            background: #fff;
+            border-radius: 100px 100px 0 0;
+            /* Arch shape */
+            overflow: hidden;
+            position: relative;
+            transition: 0.3s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .item-color {
+            height: 70%;
+            background: #e2eafc;
+        }
+
+        .g1 .item-color {
+            background: #ffcad4;
+        }
+
+        .g2 .item-color {
+            background: #e2eafc;
+        }
+
+        .g3 .item-color {
+            background: #d8e2dc;
+        }
+
+        .item-info {
+            height: 30%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">BLOOM</div>
+    </nav>
+
+    <header class="hero">
+        <div class="flower-container">
+            <div class="petal p1" style="--r: 0deg"></div>
+            <div class="petal p2" style="--r: 45deg"></div>
+            <div class="petal p3" style="--r: 90deg"></div>
+            <div class="petal p4" style="--r: 135deg"></div>
+            <div class="petal p5" style="--r: 180deg"></div>
+            <div class="petal p6" style="--r: 225deg"></div>
+            <div class="petal p7" style="--r: 270deg"></div>
+            <div class="petal p8" style="--r: 315deg"></div>
+            <div class="center"></div>
+        </div>
+
+        <h1 class="hero-title">Nature's<br>Artistry</h1>
+
+        <a href="#" class="cta">Shop Bouquets</a>
+    </header>
+
+    <section class="gallery">
+        <div class="gallery-item g1">
+            <div class="item-color"></div>
+            <div class="item-info">
+                <h3>Romance</h3>
+                <p>Roses & Lilies</p>
+            </div>
+        </div>
+        <div class="gallery-item g2">
+            <div class="item-color"></div>
+            <div class="item-info">
+                <h3>Sympathy</h3>
+                <p>White Orchids</p>
+            </div>
+        </div>
+        <div class="gallery-item g3">
+            <div class="item-color"></div>
+            <div class="item-info">
+                <h3>Celebration</h3>
+                <p>Wildflowers</p>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

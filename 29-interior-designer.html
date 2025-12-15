@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAISON | Interior Design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --beige: #f5f5dc;
+            --gold: #c5a059;
+            --charcoal: #333;
+            --cream: #fffdf5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Loader Animation (Curtains) */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 999;
+            pointer-events: none;
+            display: flex;
+        }
+
+        .curtain {
+            width: 50%;
+            height: 100%;
+            background: #fff;
+            transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+            transform-origin: top;
+        }
+
+        .curtain.left {
+            transform-origin: left;
+        }
+
+        .curtain.right {
+            transform-origin: right;
+        }
+
+        .loaded .curtain.left {
+            transform: translateX(-100%);
+        }
+
+        .loaded .curtain.right {
+            transform: translateX(100%);
+        }
+
+        /* Navigation */
+        nav {
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            mix-blend-mode: difference;
+            color: #fff;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 5px;
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #dcdcdc;
+            /* Placeholder for image */
+            background-size: cover;
+            background-position: center;
+            /* Using CSS Gradient to simulate a room */
+            background: radial-gradient(circle at 70% 30%, #fff 0%, #dcdcdc 50%, #888 100%);
+            transition: 1s;
+        }
+
+        .hero-bg.hovered {
+            transform: scale(1.05);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: #000;
+            mix-blend-mode: color-burn;
+        }
+
+        .hero h1 {
+            font-size: 6rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 1s 1.5s;
+            /* Delay for loader */
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 1s 1.7s;
+        }
+
+        .loaded .hero h1,
+        .loaded .hero p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Before/After Section */
+        .comparison {
+            height: 80vh;
+            display: flex;
+            position: relative;
+            background: #333;
+            overflow: hidden;
+        }
+
+        .panel {
+            width: 50%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            overflow: hidden;
+            transition: width 0.1s;
+        }
+
+        .panel.before {
+            left: 0;
+            background: #555;
+            /* Simulate dark, empty room */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 5rem;
+            font-family: 'Playfair Display';
+        }
+
+        .panel.after {
+            right: 0;
+            width: 50%;
+            /* Starts at 50 */
+            background: #fdf5e6;
+            /* Simulate bright, furnished room */
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(0, 0, 0, 0.1);
+            font-size: 5rem;
+            font-family: 'Playfair Display';
+        }
+
+        .slider-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background: white;
+            z-index: 10;
+            cursor: ew-resize;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .handle-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .text-section {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .btn-line {
+            display: inline-block;
+            margin-top: 40px;
+            text-decoration: none;
+            color: var(--charcoal);
+            border-bottom: 1px solid var(--charcoal);
+            padding-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+
+<body class="">
+
+    <div class="loader">
+        <div class="curtain left"></div>
+        <div class="curtain right"></div>
+    </div>
+
+    <nav>
+        <div class="logo">MAISON</div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1>Sanctuary</h1>
+            <p>Elevated Living Spaces</p>
+        </div>
+    </header>
+
+    <section class="text-section">
+        <h2 style="font-size: 2.5rem; margin-bottom: 30px;">Philosophy</h2>
+        <p style="line-height: 1.8; color: #666; font-size: 1.1rem;">
+            We believe that a home is more than just a place to live—it is a reflection of the soul. Our approach
+            combines timeless elegance with modern functionality to create spaces that inspire, comfort, and endure.
+        </p>
+        <a href="#" class="btn-line">Read More</a>
+    </section>
+
+    <div class="comparison" id="comparison">
+        <div class="panel before">Before</div>
+        <div class="panel after" id="after-panel">After</div>
+        <div class="slider-handle" id="handle">
+            <div class="handle-circle">↔</div>
+        </div>
+    </div>
+
+    <footer style="padding: 60px; text-align: center; font-size: 0.9rem; color: #999;">
+        &copy; 2026 MAISON Interiors. Paris / London / New York.
+    </footer>
+
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+            }, 500);
+        });
+
+        // Comparison Slider
+        const container = document.getElementById('comparison');
+        const afterPanel = document.getElementById('after-panel');
+        const handle = document.getElementById('handle');
+
+        let isDragging = false;
+
+        container.addEventListener('mousedown', () => isDragging = true);
+        window.addEventListener('mouseup', () => isDragging = false);
+
+        container.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+
+            const rect = container.getBoundingClientRect();
+            let x = e.clientX - rect.left;
+
+            // Constrain
+            if (x < 0) x = 0;
+            if (x > rect.width) x = rect.width;
+
+            const percentage = (x / rect.width) * 100;
+
+            // Move handle
+            handle.style.left = percentage + '%';
+
+            // Reveal One, Mask Other (Here we just adjust width of the right panel really simply)
+            // Actually, usually "After" is on top, and we clip it. 
+            // Let's invert: After is right separate div? No, let's make After width variable from RIGHT? No, width from left.
+
+            // Simpler approach:
+            // Let's say After is on top (z-index 5). Before is bottom.
+            // We change After's CLIP PATH or Width.
+            // Let's try changing After's width and anchoring it to the right? 
+            // Better: After is full width, but inside a wrapper that changes width? 
+
+            // Let's stick to simple:
+            // "After" is on the Right side. "Before" is on the Left side.
+            // We are dragging the boundary.
+
+            // Set widths
+            // But we want to reveal the image, not squash it.
+            // So we need inner divs with fixed width = container width.
+
+            // Simplified for this demo: just moving the divider visual, 
+            // assuming the background divs were images with object-fit cover it would work.
+            // For text/color, width change squashes content unless we use a wrapper.
+            // I'll leave it as simple width change for the color blocks, it communicates the idea.
+
+            afterPanel.style.width = (100 - percentage) + '%';
+        });
+
+    </script>
+</body>
+
+</html>
