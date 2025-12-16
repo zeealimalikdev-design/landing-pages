@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Cleaver | Premium Cuts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --red: #c0392b;
+            --dark: #121212;
+            --charcoal: #1e1e1e;
+            --gold: #d4af37;
+            --text: #ecf0f1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Texture Overlay */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            width: 100%;
+            z-index: 50;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--red);
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            margin-left: 2rem;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--red);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 90vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(192, 57, 43, 0.1) 0%, rgba(18, 18, 18, 1) 70%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 6rem;
+            color: white;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .accent {
+            color: var(--red);
+        }
+
+        p.subtitle {
+            font-size: 1.2rem;
+            color: #bdc3c7;
+            margin-bottom: 3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .btn-reservation {
+            padding: 1rem 3rem;
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+
+        .btn-reservation:hover {
+            background: var(--gold);
+            color: var(--dark);
+        }
+
+        /* Parallax Floating Elements */
+        .parallax-element {
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.15;
+            color: var(--text);
+            z-index: 1;
+        }
+
+        /* Products Grid */
+        .cuts {
+            padding: 5rem 5%;
+            background: var(--charcoal);
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: #fff;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--dark);
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s, border-color 0.3s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--red);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--red);
+        }
+
+        .card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .card p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .price-tag {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+        }
+
+        /* Knife Animation Container */
+        .knife-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            z-index: 5;
+            pointer-events: none;
+            opacity: 0.2;
+        }
+
+        .knife-blade {
+            width: 100%;
+            height: 10px;
+            background: white;
+            position: absolute;
+            top: 50%;
+            transform: rotate(45deg);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Scroll Progress Line */
+        .progress-line {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 5px;
+            width: 0%;
+            background: var(--red);
+            z-index: 200;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="noise"></div>
+    <div class="progress-line" id="progress"></div>
+
+    <nav>
+        <div class="logo">THE CLEAVER</div>
+        <div class="nav-links">
+            <a href="#">Our Cuts</a>
+            <a href="#">Sourcing</a>
+            <a href="#">Masterclass</a>
+            <a href="#">Contact</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="parallax-element" id="bg-text-1" style="top: 10%; right: 5%;">🥩</div>
+        <div class="parallax-element" id="bg-text-2" style="bottom: 10%; left: 5%;">🍖</div>
+        <div class="parallax-element" id="bg-text-3" style="top: 40%; left: 10%; font-size: 15rem; opacity: 0.05;">🧂
+        </div>
+
+        <div class="hero-content">
+            <h1>Prime <span class="accent">Cuts</span></h1>
+            <p class="subtitle">Artisanal Butchery since 1985</p>
+            <a href="#" class="btn-reservation">Reserve Your Order</a>
+        </div>
+    </header>
+
+    <section class="cuts">
+        <h2 class="section-title">Signature Selections</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">🥩</div>
+                <div class="price-tag">$45/lb</div>
+                <h3>Wagyu Ribeye</h3>
+                <p>A5 Japanese Wagyu with perfect marbling score. Melts in your mouth instantly.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🍖</div>
+                <div class="price-tag">$28/lb</div>
+                <h3>Dry Aged Sirloin</h3>
+                <p>Aged for 45 days in our Himalayan salt chamber for intensified flavor profile.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🍗</div>
+                <div class="price-tag">$12/lb</div>
+                <h3>Heritage Pork</h3>
+                <p>Pasture-raised Berkshire pork chops with rich, dark meat and superior fat cap.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Scroll Progress
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress').style.width = scrolled + "%";
+        });
+
+        // Parallax script
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth - e.pageX * 2) / 100;
+            const y = (window.innerHeight - e.pageY * 2) / 100;
+
+            const bg1 = document.getElementById('bg-text-1');
+            const bg2 = document.getElementById('bg-text-2');
+            const bg3 = document.getElementById('bg-text-3');
+
+            bg1.style.transform = `translateX(${x}px) translateY(${y}px)`;
+            bg2.style.transform = `translateX(${-x}px) translateY(${-y}px)`;
+            bg3.style.transform = `translateX(${x * 2}px) translateY(${y * 2}px) rotate(${x}deg)`;
+        });
+
+        // Entrance animation observing
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.card').forEach((card, index) => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(50px)';
+            card.style.transition = `all 0.6s ease ${index * 0.2}s`;
+            observer.observe(card);
+        });
+    </script>
+</body>
+
+</html>

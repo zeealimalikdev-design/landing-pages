@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas & Co. | Art Supplies</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Open+Sans:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fff;
+            --text: #333;
+            --splash-1: #ff0055;
+            --splash-2: #00ccff;
+            --splash-3: #ffcc00;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            overflow-x: hidden;
+            background: #fdfdfd;
+        }
+
+        /* Abstract Background Splashes */
+        .splash-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            mix-blend-mode: multiply;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            animation: moveBlob 20s infinite alternate;
+        }
+
+        .blob-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--splash-1);
+            top: -100px;
+            left: -100px;
+        }
+
+        .blob-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--splash-2);
+            bottom: -50px;
+            right: -50px;
+            animation-delay: -5s;
+        }
+
+        .blob-3 {
+            width: 300px;
+            height: 300px;
+            background: var(--splash-3);
+            top: 30%;
+            left: 40%;
+            animation-delay: -10s;
+        }
+
+        @keyframes moveBlob {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(50px, 50px) scale(1.1);
+            }
+        }
+
+        nav {
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Abril Fatface', cursive;
+            font-size: 2rem;
+            color: #111;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 5;
+        }
+
+        .hero-text {
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Abril Fatface', cursive;
+            font-size: 8rem;
+            line-height: 0.9;
+            color: #111;
+            mix-blend-mode: color-burn;
+        }
+
+        p.tagline {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            color: #444;
+            background: rgba(255, 255, 255, 0.8);
+            display: inline-block;
+            padding: 10px 20px;
+        }
+
+        /* Parallax Floating Tools */
+        .art-tool {
+            position: absolute;
+            font-size: 5rem;
+            z-index: 2;
+        }
+
+        /* Gallery Grid */
+        .gallery {
+            position: relative;
+            z-index: 10;
+            padding: 5rem 5%;
+            background: rgba(255, 255, 255, 0.9);
+            min-height: 100vh;
+        }
+
+        .masonry {
+            column-count: 3;
+            column-gap: 20px;
+        }
+
+        .artwork {
+            break-inside: avoid;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .artwork-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            min-height: 200px;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            transition: transform 0.5s;
+        }
+
+        .artwork:hover .artwork-img {
+            transform: scale(1.05);
+        }
+
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .artwork:hover .overlay {
+            opacity: 1;
+        }
+
+        /* Brush Stroke Animation */
+        .brush-stroke {
+            position: absolute;
+            height: 50px;
+            background: #000;
+            transform-origin: left;
+            animation: draw 2s ease forwards;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, 0) rotate(-5deg);
+            z-index: -1;
+            opacity: 0.1;
+            border-radius: 5px;
+        }
+
+        @keyframes draw {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 600px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="splash-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <nav>
+        <div class="logo">Canvas & Co.</div>
+        <div>
+            <span style="font-weight: 600; cursor: pointer;">Shop</span>
+            <span style="font-weight: 600; cursor: pointer; margin-left: 20px;">Studio</span>
+        </div>
+    </nav>
+
+    <header class="hero" id="hero">
+        <div class="brush-stroke"></div>
+
+        <div class="art-tool" style="top: 20%; left: 20%; transform: rotate(-20deg);" data-speed="0.2">🖌️</div>
+        <div class="art-tool" style="top: 15%; right: 15%; transform: rotate(15deg);" data-speed="-0.3">🎨</div>
+        <div class="art-tool" style="bottom: 25%; left: 10%; font-size: 3rem;" data-speed="0.5">🖍️</div>
+        <div class="art-tool" style="bottom: 20%; right: 25%; font-size: 4rem;" data-speed="-0.1">🖊️</div>
+
+        <div class="hero-text">
+            <h1>Create<br>Without Limits</h1>
+            <p class="tagline">Premium supplies for the modern artist.</p>
+        </div>
+    </header>
+
+    <section class="gallery">
+        <div class="masonry">
+            <div class="artwork">
+                <div class="artwork-img" style="height: 300px; background: #e0f7fa;">🖼️</div>
+                <div class="overlay">
+                    <h3>Watercolors</h3>
+                    <p>Vibrant pigments</p>
+                </div>
+            </div>
+            <div class="artwork">
+                <div class="artwork-img" style="height: 400px; background: #fce4ec;">🎭</div>
+                <div class="overlay">
+                    <h3>Acrylics</h3>
+                    <p>Heavy body</p>
+                </div>
+            </div>
+            <div class="artwork">
+                <div class="artwork-img" style="height: 250px; background: #fff3e0;">✏️</div>
+                <div class="overlay">
+                    <h3>Graphite</h3>
+                    <p>Sketching set</p>
+                </div>
+            </div>
+            <div class="artwork">
+                <div class="artwork-img" style="height: 350px; background: #e8eaf6;">🖌️</div>
+                <div class="overlay">
+                    <h3>Brushes</h3>
+                    <p>Sable & Synthetic</p>
+                </div>
+            </div>
+            <div class="artwork">
+                <div class="artwork-img" style="height: 300px; background: #f3e5f5;">🗒️</div>
+                <div class="overlay">
+                    <h3>Papers</h3>
+                    <p>Cold press pads</p>
+                </div>
+            </div>
+            <div class="artwork">
+                <div class="artwork-img" style="height: 450px; background: #e0f2f1;">🧵</div>
+                <div class="overlay">
+                    <h3>Canvas</h3>
+                    <p>Stretched linen</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Mouse Move Parallax
+        document.addEventListener('mousemove', (e) => {
+            const tools = document.querySelectorAll('.art-tool');
+
+            const x = (e.clientX / window.innerWidth) * 2 - 1;
+            const y = (e.clientY / window.innerHeight) * 2 - 1;
+
+            tools.forEach(tool => {
+                const speed = tool.getAttribute('data-speed');
+                const xPos = x * speed * 50;
+                const yPos = y * speed * 50;
+
+                tool.style.transform = `translate(${xPos}px, ${yPos}px) rotate(${Math.random() * 10 - 5}deg)`;
+            });
+        });
+
+        // Smooth reveal for gallery
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.artwork').forEach((art, i) => {
+            art.style.opacity = 0;
+            art.style.transform = 'translateY(50px)';
+            art.style.transition = `all 0.6s ease ${i * 0.1}s`;
+            observer.observe(art);
+        });
+    </script>
+</body>
+
+</html>

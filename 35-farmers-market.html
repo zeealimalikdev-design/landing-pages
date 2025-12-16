@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roots & Soil | Farmer's Market</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,700;1,400&family=Oswald:wght@300;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --earth: #5d4037;
+            --soil: #3e2723;
+            --leaf: #558b2f;
+            --sun: #fbc02d;
+            --paper: #efebe9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background-color: var(--paper);
+            color: var(--soil);
+            overflow-x: hidden;
+        }
+
+        /* Paper Texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 200;
+        }
+
+        nav {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            color: var(--earth);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            border: 2px solid var(--earth);
+            display: inline-block;
+            padding: 0.5rem 1rem;
+        }
+
+        .hero {
+            height: 80vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            z-index: 10;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .hero-btn {
+            font-family: 'Oswald', sans-serif;
+            text-decoration: none;
+            background: var(--leaf);
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .hero-btn:hover {
+            background: var(--soil);
+        }
+
+        /* Falling Leaves */
+        .leaf {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.6;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg) translateX(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(110vh) rotate(360deg) translateX(20px);
+                opacity: 0;
+            }
+        }
+
+        /* Products Scroll */
+        .market-scroll {
+            padding: 5rem 0;
+            overflow: hidden;
+            white-space: nowrap;
+            background: var(--earth);
+            color: var(--paper);
+        }
+
+        .scroll-inner {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        .product {
+            display: inline-block;
+            width: 300px;
+            height: 400px;
+            margin: 0 2rem;
+            background: var(--paper);
+            color: var(--soil);
+            white-space: normal;
+            vertical-align: top;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 4px;
+            position: relative;
+            /* Tilt effect */
+            transition: transform 0.3s;
+        }
+
+        .product:hover {
+            transform: scale(1.05);
+        }
+
+        .product-img {
+            font-size: 6rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Info Section with Parallax BG */
+        .farm-info {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            position: relative;
+            padding: 5rem;
+        }
+
+        .info-text {
+            width: 40%;
+            font-size: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .info-img {
+            width: 40%;
+            height: 500px;
+            background: #d7ccc8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10rem;
+            border-radius: 50% 50% 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sun {
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: var(--sun);
+            border-radius: 50%;
+            filter: blur(40px);
+            animation: pulse 4s infinite alternate;
+        }
+
+        @keyframes pulse {
+            to {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">ROOTS & SOIL</div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Straight from<br>the Earth</h1>
+            <a href="#" class="hero-btn">VISIT MARKET</a>
+        </div>
+    </header>
+
+    <div class="market-scroll">
+        <div class="scroll-inner">
+            <!-- Duplicated content for seamless scroll -->
+            <div class="product">
+                <div class="product-img">🥔</div>
+                <h3 class="product-title">Russet Potatoes</h3>
+                <p>Grown in Idaho soil.</p>
+            </div>
+            <div class="product">
+                <div class="product-img">🍯</div>
+                <h3 class="product-title">Raw Honey</h3>
+                <p>Local wildflower blend.</p>
+            </div>
+            <div class="product">
+                <div class="product-img">🥚</div>
+                <h3 class="product-title">Free Range Eggs</h3>
+                <p>Golden yolks.</p>
+            </div>
+            <div class="product">
+                <div class="product-img">🥖</div>
+                <h3 class="product-title">baguette</h3>
+                <p>Stone oven baked.</p>
+            </div>
+            <!-- Duplicate set -->
+            <div class="product">
+                <div class="product-img">🥔</div>
+                <h3 class="product-title">Russet Potatoes</h3>
+                <p>Grown in Idaho soil.</p>
+            </div>
+            <div class="product">
+                <div class="product-img">🍯</div>
+                <h3 class="product-title">Raw Honey</h3>
+                <p>Local wildflower blend.</p>
+            </div>
+            <div class="product">
+                <div class="product-img">🥚</div>
+                <h3 class="product-title">Free Range Eggs</h3>
+                <p>Golden yolks.</p>
+            </div>
+            <div class="product">
+                <div class="product-img">🥖</div>
+                <h3 class="product-title">baguette</h3>
+                <p>Stone oven baked.</p>
+            </div>
+        </div>
+    </div>
+
+    <section class="farm-info">
+        <div class="sun"></div>
+        <div class="info-text" data-speed="0.5">
+            <p>"We believe in the power of soil, sun, and rain. No chemicals, just nature doing its best work under our
+                careful watch."</p>
+        </div>
+        <div class="info-img" data-speed="-0.2">
+            🌻
+        </div>
+    </section>
+
+    <script>
+        // Generate falling leaves
+        const createLeaves = () => {
+            const leafEmojis = ['🍃', '🍂', '🍁'];
+            const hero = document.querySelector('.hero');
+
+            for (let i = 0; i < 15; i++) {
+                const leaf = document.createElement('div');
+                leaf.classList.add('leaf');
+                leaf.innerText = leafEmojis[Math.floor(Math.random() * leafEmojis.length)];
+                leaf.style.left = Math.random() * 100 + '%';
+                leaf.style.animationDuration = 5 + Math.random() * 10 + 's';
+                leaf.style.animationDelay = Math.random() * 5 + 's';
+                hero.appendChild(leaf);
+            }
+        };
+
+        createLeaves();
+
+        // Simple scroll parallax for info section
+        const infoSection = document.querySelector('.farm-info');
+        window.addEventListener('scroll', () => {
+            const rect = infoSection.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                const scrolled = window.scrollY - infoSection.offsetTop;
+
+                document.querySelector('.info-text').style.transform = `translateY(${scrolled * 0.1}px)`;
+                document.querySelector('.info-img').style.transform = `translateY(${scrolled * -0.05}px)`;
+            }
+        });
+    </script>
+</body>
+
+</html>
